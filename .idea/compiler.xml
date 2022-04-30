@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="recruit-employer" />
+        <module name="recruit-position" />
+        <module name="recruit-resume" />
+        <module name="recruit-applicant" />
+        <module name="recruit-api" />
+      </profile>
+    </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="recruit-api" target="8" />
+      <module name="recruit-applicant" target="8" />
+      <module name="recruit-common-api" target="8" />
+      <module name="recruit-commonapi" target="8" />
+      <module name="recruit-employer" target="8" />
+      <module name="recruit-position" target="8" />
+      <module name="recruit-resume" target="8" />
+      <module name="recruit-user" target="8" />
       <module name="ruralRecruit" target="1.5" />
     </bytecodeTargetLevel>
   </component>

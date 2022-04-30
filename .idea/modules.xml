@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/recruit-api/recruit-api.iml" filepath="$PROJECT_DIR$/recruit-api/recruit-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recruit-applicant/recruit-applicant.iml" filepath="$PROJECT_DIR$/recruit-applicant/recruit-applicant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recruit-employer/recruit-employer.iml" filepath="$PROJECT_DIR$/recruit-employer/recruit-employer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recruit-position/recruit-position.iml" filepath="$PROJECT_DIR$/recruit-position/recruit-position.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recruit-resume/recruit-resume.iml" filepath="$PROJECT_DIR$/recruit-resume/recruit-resume.iml" />
       <module fileurl="file://$PROJECT_DIR$/ruralRecruit.iml" filepath="$PROJECT_DIR$/ruralRecruit.iml" />
     </modules>
   </component>

@@ -33,12 +33,12 @@ public class ApplicantServiceImpl implements ApplicantService{
 
     @Override
     public Integer updateApplicant(Applicant applicant) {
-        return updateApplicant(applicant);
+        return applicantDao.updateApplicant(applicant);
     }
 
     @Override
     public Integer removeApplicant(String phone) {
-        return removeApplicant(phone);
+        return applicantDao.removeApplicant(phone);
     }
 
 }

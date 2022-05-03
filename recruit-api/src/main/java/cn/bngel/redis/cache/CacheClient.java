@@ -1,4 +1,4 @@
-package cn.bngel.applicant.service.cache;
+package cn.bngel.redis.cache;
 
 import java.util.Collection;
 import java.util.List;

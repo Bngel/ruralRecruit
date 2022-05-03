@@ -1,10 +1,13 @@
-cn\bngel\pojo\Constant.class
+cn\bngel\redis\cache\CacheClient.class
 cn\bngel\redis\SimpleRedisClient$SyncContext.class
 cn\bngel\redis\SimpleRedisClient.class
 cn\bngel\util\SerializeUtil.class
+cn\bngel\pojo\Resume.class
+cn\bngel\redis\RedisConfiguration.class
+cn\bngel\pojo\Constant.class
+cn\bngel\redis\cache\CacheRedisClient.class
 cn\bngel\pojo\CommonResult.class
 cn\bngel\pojo\Employer.class
-cn\bngel\pojo\Resume.class
 cn\bngel\pojo\WorkExperience.class
 cn\bngel\pojo\Applicant.class
 cn\bngel\pojo\Job.class

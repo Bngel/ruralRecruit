@@ -10,9 +10,6 @@ import redis.clients.jedis.JedisPoolConfig;
 @Component
 public class SimpleRedisClient {
 
-    @Autowired
-    private JedisPool redisClientPool;
-
     public interface SyncContext {
         Object invoke(Jedis jedis);
     }
@@ -23,4 +20,23 @@ public class SimpleRedisClient {
         }
     }
 
+    public String get(String key) {
+        return (String)sync(jedis -> jedis.get(key));
+    }
+
+    public String set(String key, String value) {
+        return (String)sync(jedis -> jedis.set(key, value));
+    }
+
+    public String setex(String key, long seconds, String value) {
+        return (String) sync(jedis -> jedis.setex(key, seconds, value));
+    }
+
+    public long del(String key) {
+        return (long) sync(jedis -> jedis.del(key));
+    }
+
+
+    @Autowired
+    private JedisPool redisClientPool;
 }

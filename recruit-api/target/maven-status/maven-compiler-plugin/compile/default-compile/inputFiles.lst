@@ -2,8 +2,11 @@ D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\pojo\Resume.
 D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\util\SerializeUtil.java
 D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\pojo\Applicant.java
 D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\pojo\Constant.java
+D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\redis\RedisConfiguration.java
 D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\pojo\CommonResult.java
 D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\redis\SimpleRedisClient.java
 D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\pojo\WorkExperience.java
+D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\redis\cache\CacheClient.java
 D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\pojo\Job.java
+D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\redis\cache\CacheRedisClient.java
 D:\git\JAVA\Project\ruralRecruit\recruit-api\src\main\java\cn\bngel\pojo\Employer.java

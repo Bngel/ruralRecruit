@@ -1,4 +1,4 @@
-package cn.bngel.applicant.service.cache;
+package cn.bngel.redis.cache;
 
 import cn.bngel.pojo.Applicant;
 import cn.bngel.pojo.Constant;

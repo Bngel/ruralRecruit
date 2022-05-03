@@ -155,4 +155,54 @@ public class ApplicantController {
         }
         return result;
     }
+
+    /**
+     * 求职者通过手机号与短信验证码进行登录
+     * @param phone 手机号
+     * @param code 短信验证码
+     * @return 求职者详细信息
+     */
+    @ApiOperation(value = "Applicant - 求职者登录")
+    @GetMapping("/applicant/login")
+    public CommonResult<?> login(@RequestParam("phone") String phone,
+                                 @RequestParam("code") String code) {
+        CommonResult<?> result;
+        try {
+            Applicant applicant = applicantService.login(phone, code);
+            if (applicant == null) {
+                result = CommonResult.failure(new Applicant());
+                return result;
+            }
+            result = CommonResult.success(applicant);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = CommonResult.failure(new Applicant());
+            return result;
+        }
+        return result;
+    }
+
+    /**
+     * 向指定的手机号发送短信验证码
+     * @param phone 手机号
+     * @return 成功则返回指定的短信验证码, 失败则返回空字符串
+     */
+    @ApiOperation(value = "Applicant - 发送短信验证码")
+    @GetMapping("/applicant/code")
+    public CommonResult<?> sendCode(@RequestParam("phone") String phone) {
+        CommonResult<?> result;
+        try {
+            String code = applicantService.sendLoginCode(phone);
+            if (code == null) {
+                result = CommonResult.failure("");
+                return result;
+            }
+            result = CommonResult.success(code);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = CommonResult.failure("");
+            return result;
+        }
+        return result;
+    }
 }

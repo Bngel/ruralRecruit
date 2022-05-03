@@ -1,9 +1,11 @@
 package cn.bngel.applicant.service;
 
 import cn.bngel.applicant.dao.ApplicantDao;
-import cn.bngel.applicant.service.cache.CacheClient;
+import cn.bngel.redis.SimpleRedisClient;
+import cn.bngel.redis.cache.CacheClient;
 import cn.bngel.pojo.Applicant;
 import cn.bngel.pojo.Constant;
+import cn.bngel.util.TencentCloudClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +13,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 功能的详细说明见接口Interface文件
  */
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
-
-    @Autowired
-    private ApplicantDao applicantDao;
-
-    @Autowired
-    private CacheClient cacheClient;
 
     @Override
     public Applicant getApplicant(String phone) {
@@ -105,8 +102,53 @@ public class ApplicantServiceImpl implements ApplicantService {
 
     @Override
     public Applicant login(String phone, String code) {
-        return null;
+        if (phone == null || code == null) {
+            return null;
+        }
+        final String LOGIN_CODE_KEY = Constant.CACHE_APPLICANT_LOGIN + phone;
+        String cacheCode = redisClient.get(LOGIN_CODE_KEY);
+        Applicant applicant = null;
+        if (code.equals(cacheCode)) {
+            applicant = getApplicant(phone);
+            redisClient.del(LOGIN_CODE_KEY);
+        }
+        return applicant;
     }
+
+    @Override
+    public String sendLoginCode(String phone) {
+        if (phone == null){
+            return null;
+        }
+        // 创建一个六位数的短信验证码
+        String code = String.valueOf(new Random().nextInt(900000) + 100000);
+        try {
+            String cacheCode = redisClient.set(Constant.CACHE_APPLICANT_LOGIN + phone, code);
+            if (cacheCode == null) {
+                return null;
+            }
+            String smsCode = tencentCloudClient.sendMessage("+86", phone, code);
+            if (!"OK".equals(smsCode)) {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return code;
+    }
+
+    @Autowired
+    private ApplicantDao applicantDao;
+
+    @Autowired
+    private CacheClient cacheClient;
+
+    @Autowired
+    private SimpleRedisClient redisClient;
+
+    @Autowired
+    private TencentCloudClient tencentCloudClient;
 
     private Applicant parseIdCard(Applicant applicant) {
         String idCard = applicant.getIdCard();

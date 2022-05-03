@@ -19,6 +19,7 @@ spring:
         extension-configs:
           - recruit-datasource.yaml
           - recruit-redis-config.yaml
+          - recruit-tencent-cloud-config.yaml
 
 mybatis:
   configuration:

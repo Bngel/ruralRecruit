@@ -48,4 +48,11 @@ public interface ApplicantService {
      */
     Applicant login(String phone, String code);
 
+    /**
+     * 向指定手机号发送短信验证码
+     * @param phone 收短信的手机号
+     * @return 发送的验证码
+     */
+    String sendLoginCode(String phone);
+
 }

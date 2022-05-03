@@ -25,6 +25,9 @@ public class Constant {
     /**
      * Redis Cache数据缓存定义字段
      */
+    // 缓存时间相关常量
+    public static final int CACHE_EXPIRE_TIME_MIN = 600;
+    public static final int CACHE_EXPIRE_TIME_MAX = 3600;
     // Applicant 部分
     public static final String CACHE_APPLICANT = "CACHE_APPLICANT:";
     public static final String CACHE_APPLICANT_APPLYING = "CACHE_APPLICANT:APPLYING";

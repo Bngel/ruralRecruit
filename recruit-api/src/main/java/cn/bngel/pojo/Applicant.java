@@ -22,8 +22,8 @@ public class Applicant implements Serializable {
     private String idCard;
     @ApiModelProperty(value = "年龄(通过身份证解析)", dataType = "Integer", required = true)
     private Integer age;
-    @ApiModelProperty(value = "生日(通过身份证解析)", dataType = "Date", required = true)
-    private Date birthday;
+    @ApiModelProperty(value = "生日(通过身份证解析)", dataType = "Long", required = true)
+    private Long birthday;
     @ApiModelProperty(value = "性别(通过身份证解析)(男1女0)", dataType = "Integer", required = true)
     private Integer gender;
     @ApiModelProperty(value = "真实姓名", dataType = "String", required = true)

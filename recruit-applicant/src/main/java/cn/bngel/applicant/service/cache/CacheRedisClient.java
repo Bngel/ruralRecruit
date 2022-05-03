@@ -15,12 +15,8 @@ public class CacheRedisClient implements CacheClient{
     @Autowired
     private SimpleRedisClient redisClient;
 
-    // 设置key的过期时间
-    private final int MIN_EXPIRED_TIME = 600;
-    private final int MAX_EXPIRED_TIME = 3600;
-
     /**
-     * 通过手机号在Redis中尝试获取缓存
+     * 通过key在Redis中尝试获取缓存
      * @param key Redis中的key
      * @return 若存在则返回缓存, 否则返回NULL
      */
@@ -100,7 +96,7 @@ public class CacheRedisClient implements CacheClient{
      */
     public void setCache(String key, Object obj) {
         try {
-            int seconds = MIN_EXPIRED_TIME + new Random().nextInt(MAX_EXPIRED_TIME - MIN_EXPIRED_TIME);
+            int seconds = Constant.CACHE_EXPIRE_TIME_MIN + new Random().nextInt(Constant.CACHE_EXPIRE_TIME_MAX - Constant.CACHE_EXPIRE_TIME_MIN);
             redisClient.sync(jedis ->
                     jedis.setex(key, seconds, SerializeUtil.serializeToString(obj)));
         } catch (Exception e) {
@@ -115,7 +111,7 @@ public class CacheRedisClient implements CacheClient{
     public void setCaches(String key, Collection<?> data) {
         try {
             redisClient.sync(jedis -> {
-                int seconds = MIN_EXPIRED_TIME + new Random().nextInt(MAX_EXPIRED_TIME - MIN_EXPIRED_TIME);
+                int seconds = Constant.CACHE_EXPIRE_TIME_MIN + new Random().nextInt(Constant.CACHE_EXPIRE_TIME_MAX - Constant.CACHE_EXPIRE_TIME_MIN);
                 for (Object datum: data) {
                     jedis.sadd(key, SerializeUtil.serializeToString(datum));
                 }

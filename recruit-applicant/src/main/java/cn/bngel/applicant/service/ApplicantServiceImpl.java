@@ -2,13 +2,14 @@ package cn.bngel.applicant.service;
 
 import cn.bngel.applicant.dao.ApplicantDao;
 import cn.bngel.applicant.service.cache.CacheClient;
-import cn.bngel.applicant.service.cache.CacheRedisClient;
 import cn.bngel.pojo.Applicant;
 import cn.bngel.pojo.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,6 +61,14 @@ public class ApplicantServiceImpl implements ApplicantService {
         if (applicant == null || applicant.getPhone() == null) {
             return 0;
         }
+        // 通过身份证号解析出信息进行填充
+        String idCard = applicant.getIdCard();
+        if (idCard != null) {
+            applicant = parseIdCard(applicant);
+            if (applicant == null) {
+                return 0;
+            }
+        }
         int save = applicantDao.saveApplicant(applicant);
         if (save == 1) {
             final String CACHE_KEY = Constant.CACHE_APPLICANT + applicant.getPhone();
@@ -94,4 +103,43 @@ public class ApplicantServiceImpl implements ApplicantService {
         return remove;
     }
 
+    @Override
+    public Applicant login(String phone, String code) {
+        return null;
+    }
+
+    private Applicant parseIdCard(Applicant applicant) {
+        String idCard = applicant.getIdCard();
+        if (idCard != null && idCard.length() == 18) {
+            try {
+                String yearStr = idCard.substring(6, 10);
+                String monthStr = idCard.substring(10, 12);
+                String dayStr = idCard.substring(12, 14);
+                String birthdayStr = yearStr + "-" + monthStr + "-" + dayStr;
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date birthday = dateFormat.parse(birthdayStr);
+                applicant.setBirthday(birthday.getTime());
+                int gender = (idCard.charAt(16) - '0') % 2;
+                applicant.setGender(gender);
+                String now = dateFormat.format(new Date());
+                String[] timeArr = now.split("-");
+                if (timeArr.length != 3) {
+                    return null;
+                }
+                int yearNow = Integer.parseInt(timeArr[0]);
+                int monthNow = Integer.parseInt(timeArr[1]);
+                int dayNow = Integer.parseInt(timeArr[2]);
+                int age = yearNow - Integer.parseInt(yearStr);
+                if (monthNow < Integer.parseInt(monthStr) ||
+                        (monthNow == Integer.parseInt(monthStr) && dayNow < Integer.parseInt(dayStr))) {
+                    age -= 1;
+                }
+                applicant.setAge(age);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return applicant;
+    }
 }

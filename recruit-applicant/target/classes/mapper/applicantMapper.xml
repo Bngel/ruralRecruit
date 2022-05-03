@@ -6,7 +6,7 @@
         <id column="phone" jdbcType="VARCHAR" javaType="String" property="phone"/>
         <result column="id_card" jdbcType="VARCHAR" javaType="String" property="idCard"/>
         <result column="age" jdbcType="TINYINT" javaType="Integer" property="age"/>
-        <result column="birthday" jdbcType="DATE" javaType="Date" property="birthday"/>
+        <result column="birthday" jdbcType="BIGINT" javaType="Long" property="birthday"/>
         <result column="gender" jdbcType="TINYINT" javaType="Integer" property="gender"/>
         <result column="real_name" jdbcType="VARCHAR" javaType="String" property="realName"/>
         <result column="nick_name" jdbcType="VARCHAR" javaType="String" property="nickName"/>

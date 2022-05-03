@@ -40,4 +40,12 @@ public interface ApplicantService {
      */
     Integer removeApplicant(String phone);
 
+    /**
+     * 用户使用手机号以及手机验证码进行登录
+     * @param phone 手机号
+     * @param code 手机验证码
+     * @return 求职者详细信息
+     */
+    Applicant login(String phone, String code);
+
 }

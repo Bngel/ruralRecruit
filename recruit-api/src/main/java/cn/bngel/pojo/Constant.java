@@ -25,6 +25,8 @@ public class Constant {
     /**
      * Redis Cache数据缓存定义字段
      */
+    // Applicant 部分
     public static final String CACHE_APPLICANT = "CACHE_APPLICANT:";
+    public static final String CACHE_APPLICANT_APPLYING = "CACHE_APPLICANT:APPLYING";
 
 }

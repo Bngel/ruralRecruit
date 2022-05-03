@@ -3,9 +3,11 @@ package cn.bngel.applicant.controller;
 import cn.bngel.applicant.service.ApplicantService;
 import cn.bngel.pojo.Applicant;
 import cn.bngel.pojo.CommonResult;
+import cn.bngel.pojo.Constant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -83,7 +85,14 @@ public class ApplicantController {
             } else {
                 result = CommonResult.success(applicant);
             }
-        } catch (Exception e) {
+        } catch (DuplicateKeyException duplicateKeyException){
+            result = new CommonResult<>(
+                    Constant.RESULT_CODE_USER_EXISTED,
+                    Constant.RESULT_MSG_USER_EXISTED,
+                    new Applicant()
+            );
+            return result;
+        } catch(Exception e) {
             e.printStackTrace();
             result = CommonResult.failure(new Applicant());
             return result;

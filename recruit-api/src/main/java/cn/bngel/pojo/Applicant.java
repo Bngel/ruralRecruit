@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "求职者")
-public class Applicant {
+public class Applicant implements Serializable {
     @ApiModelProperty(value = "手机号(作为登录账号)(primary-key)", dataType = "String", required = true)
     private String phone;
     @ApiModelProperty(value = "身份证号", dataType = "String", required = true)

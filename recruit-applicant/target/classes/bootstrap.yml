@@ -18,6 +18,7 @@ spring:
         file-extension: yaml
         extension-configs:
           - recruit-datasource.yaml
+          - recruit-redis-config.yaml
 
 mybatis:
   configuration:

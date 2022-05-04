@@ -7,9 +7,11 @@ public class Constant {
      */
     public static final int RESULT_CODE_SUCCESS = 200;
     public static final int RESULT_CODE_FAILURE = 400;
+    public static final int RESULT_CODE_FORBIDDEN = 403;
     public static final int RESULT_CODE_NOT_FOUND = 404;
     public static final int RESULT_CODE_DATA_NOT_EXIST = 411;
     public static final int RESULT_CODE_USER_EXISTED = 412;
+    public static final int RESULT_CODE_AUTH_ERROR = 413;
     public static final int RESULT_CODE_NOT_INITIALIZED = 0;
 
     /**
@@ -17,9 +19,11 @@ public class Constant {
      */
     public static final String RESULT_MSG_SUCCESS = "SUCCESS";
     public static final String RESULT_MSG_FAILURE = "FAILURE";
+    public static final String RESULT_MSG_FORBIDDEN = "FORBIDDEN";
     public static final String RESULT_MSG_NOT_FOUND = "NOT FOUND";
     public static final String RESULT_MSG_DATA_NOT_EXIST = "DATA NOT EXIST";
     public static final String RESULT_MSG_USER_EXISTED = "USER EXISTED";
+    public static final String RESULT_MSG_AUTH_ERROR = "AUTH ERROR";
     public static final String RESULT_MSG_NOT_INITIALIZED = "RESULT NOT INITIALIZED";
 
     /**

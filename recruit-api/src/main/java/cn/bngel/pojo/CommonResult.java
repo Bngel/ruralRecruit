@@ -38,6 +38,14 @@ public class CommonResult<T> {
         );
     }
 
+    public static CommonResult<?> authError() {
+        return new CommonResult<>(
+                Constant.RESULT_CODE_AUTH_ERROR,
+                Constant.RESULT_MSG_AUTH_ERROR,
+                ""
+        );
+    }
+
     public static CommonResult<?> notInitialized() {
         return new CommonResult<>(
                 Constant.RESULT_CODE_NOT_INITIALIZED,

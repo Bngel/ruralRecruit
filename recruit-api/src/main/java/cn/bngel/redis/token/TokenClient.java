@@ -18,9 +18,8 @@ public interface TokenClient {
 
     /**
      * 判断token是否合法
-     * @param key token-key 标识token的所有者
      * @param token token
      * @return 合法返回 true, 不合法则返回false
      */
-    boolean verifyToken(String key, String token);
+    boolean verifyToken(String token);
 }

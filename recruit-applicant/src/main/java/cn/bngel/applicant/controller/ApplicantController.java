@@ -194,7 +194,7 @@ public class ApplicantController {
      * @return 成功则返回指定的短信验证码, 失败则返回空字符串
      */
     @ApiOperation(value = "Applicant - 发送短信验证码")
-    @GetMapping("/applicant/code")
+    @GetMapping("/applicant/login/code")
     public CommonResult<?> sendCode(@RequestParam("phone") String phone) {
         CommonResult<?> result;
         try {

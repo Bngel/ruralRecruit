@@ -29,7 +29,6 @@
         SELECT * FROM `recruit_applicant` WHERE `apply_status` = 1;
     </select>
 
-
     <insert id="saveApplicant">
         INSERT INTO `recruit_applicant`(
             <if test="applicant.phone!=null">`phone`</if>

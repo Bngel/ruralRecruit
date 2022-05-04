@@ -1,5 +1,10 @@
-package cn.bngel.redis;
+package cn.bngel.applicant.config;
 
+import cn.bngel.redis.SimpleRedisClient;
+import cn.bngel.redis.cache.CacheClient;
+import cn.bngel.redis.cache.CacheRedisClient;
+import cn.bngel.redis.token.TokenClient;
+import cn.bngel.redis.token.TokenRedisClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,16 +36,18 @@ public class RedisConfiguration {
     private int maxTotal;
 
     @Bean
-    public JedisPool getJedisPool() {
-        JedisPoolConfig config = new JedisPoolConfig();
-        config.setMaxIdle(maxIdle);
-        config.setMaxTotal(maxTotal);
-        config.setTestOnBorrow(false);
-        config.setTestOnReturn(false);
-        String auth = password;
-        if (account != null) {
-            auth = account + ":" + password;
-        }
-        return new JedisPool(config, host, port, timeout, auth);
+    public SimpleRedisClient getSimpleRedisClient() {
+        return new SimpleRedisClient(host, account, password, port, timeout, maxIdle, maxTotal);
     }
+
+    @Bean
+    public TokenClient getTokenClient() {
+        return new TokenRedisClient();
+    }
+
+    @Bean
+    public CacheClient getCacheClient() {
+        return new CacheRedisClient();
+    }
+
 }

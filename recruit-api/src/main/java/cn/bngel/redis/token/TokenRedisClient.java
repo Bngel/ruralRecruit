@@ -6,23 +6,22 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.DES;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
 public class TokenRedisClient implements TokenClient{
 
     @Override
     public String refreshToken(String key, String data) {
         // 将数据进行加密后得到实际的token存到redis中
-        // 若已存在则刷新token的expiredTime
         return (String) redisClient.sync(jedis -> {
             String token = jedis.get(Constant.CACHE_APPLICANT_TOKEN + key);
             if (token == null) {
                 token = getToken(data);
                 redisClient.set(Constant.CACHE_APPLICANT_TOKEN + key, token);
             }
-            jedis.expire(Constant.CACHE_APPLICANT_TOKEN + key, Constant.CACHE_EXPIRE_TOKEN);
             return token;
         });
     }
@@ -33,11 +32,15 @@ public class TokenRedisClient implements TokenClient{
     }
 
     @Override
-    public boolean verifyToken(String key, String token) {
-        if (key == null || token == null) {
+    public boolean verifyToken(String token) {
+        String salt = redisClient.get(Constant.CACHE_APPLICANT_TOKEN_SALT);
+        if (token == null || salt == null) {
             return false;
         }
-        String cachedToken = redisClient.get(Constant.CACHE_APPLICANT_TOKEN + key);
+        String decryptedToken = decryptToken(token, salt);
+        JSONObject jsonObject = JSONUtil.toBean(decryptedToken, JSONObject.class);
+        String id = (String) jsonObject.get("id");
+        String cachedToken = redisClient.get(Constant.CACHE_APPLICANT_TOKEN + id);
         return token.equals(cachedToken);
     }
 

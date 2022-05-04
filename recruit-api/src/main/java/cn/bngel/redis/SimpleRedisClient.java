@@ -1,12 +1,17 @@
 package cn.bngel.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
-@Component
 public class SimpleRedisClient {
+
+    public SimpleRedisClient(String host, String account, String password, int port, int timeout, int maxIdle, int maxTotal) {
+        this.redisClientPool = getJedisPool(host, account, password, port, timeout, maxIdle, maxTotal);
+    }
 
     public interface SyncContext {
         Object invoke(Jedis jedis);
@@ -48,7 +53,18 @@ public class SimpleRedisClient {
         return (long) sync(jedis -> jedis.expire(key, seconds));
     }
 
-
-    @Autowired
     private JedisPool redisClientPool;
+
+    private JedisPool getJedisPool(String host, String account, String password, int port, int timeout, int maxIdle, int maxTotal) {
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxIdle(maxIdle);
+        config.setMaxTotal(maxTotal);
+        config.setTestOnBorrow(false);
+        config.setTestOnReturn(false);
+        String auth = password;
+        if (account != null) {
+            auth = account + ":" + password;
+        }
+        return new JedisPool(config, host, port, timeout, auth);
+    }
 }

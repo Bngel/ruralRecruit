@@ -8,7 +8,9 @@ import cn.bngel.pojo.Constant;
 import cn.bngel.util.TencentCloudClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -147,6 +149,26 @@ public class ApplicantServiceImpl implements ApplicantService {
             return null;
         }
         return code;
+    }
+
+    @Override
+    public String uploadProfile(String phone, MultipartFile profile) throws IOException{
+        String bucketName = "recruit-profile";
+        String profileUrl = tencentCloudClient.uploadFile(profile, bucketName, phone + "/profile.png");
+        if (profileUrl == null)
+            return null;
+        Applicant applicant = getApplicant(phone);
+        if (applicant == null)
+            return null;
+        applicant.setProfile(profileUrl);
+        Applicant updateApplicant = new Applicant();
+        updateApplicant.setPhone(applicant.getPhone());
+        updateApplicant.setProfile(profileUrl);
+        Integer saveUser = updateApplicant(updateApplicant);
+        if (saveUser == 1)
+            return profileUrl;
+        else
+            return null;
     }
 
     @Autowired

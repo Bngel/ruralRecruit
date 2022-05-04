@@ -1,7 +1,9 @@
 package cn.bngel.applicant.service;
 
 import cn.bngel.pojo.Applicant;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ApplicantService {
@@ -54,5 +56,13 @@ public interface ApplicantService {
      * @return 发送的验证码
      */
     String sendLoginCode(String phone);
+
+    /**
+     * 上传头像
+     * @param phone 手机号
+     * @param profile 上传的头像文件
+     * @return 头像的URL
+     */
+    String uploadProfile(String phone, MultipartFile profile) throws IOException;
 
 }

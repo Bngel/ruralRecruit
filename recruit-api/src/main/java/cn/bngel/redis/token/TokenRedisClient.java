@@ -9,7 +9,6 @@ import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 public class TokenRedisClient implements TokenClient{
 

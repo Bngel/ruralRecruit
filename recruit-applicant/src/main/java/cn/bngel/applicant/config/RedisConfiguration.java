@@ -8,8 +8,6 @@ import cn.bngel.redis.token.TokenRedisClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 public class RedisConfiguration {
@@ -36,17 +34,17 @@ public class RedisConfiguration {
     private int maxTotal;
 
     @Bean
-    public SimpleRedisClient getSimpleRedisClient() {
+    public SimpleRedisClient simpleRedisClient() {
         return new SimpleRedisClient(host, account, password, port, timeout, maxIdle, maxTotal);
     }
 
     @Bean
-    public TokenClient getTokenClient() {
+    public TokenClient tokenClient() {
         return new TokenRedisClient();
     }
 
     @Bean
-    public CacheClient getCacheClient() {
+    public CacheClient cacheClient() {
         return new CacheRedisClient();
     }
 

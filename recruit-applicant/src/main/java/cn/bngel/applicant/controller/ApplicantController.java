@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -204,6 +205,31 @@ public class ApplicantController {
                 return result;
             }
             result = CommonResult.success(code);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = CommonResult.failure("");
+            return result;
+        }
+        return result;
+    }
+
+    /**
+     * 上传求职者的头像
+     * @param profile 头像文件
+     * @return 成功上传则返回头像URL, 否则返回空串
+     */
+    @ApiOperation(value = "Applicant - 上传头像")
+    @PostMapping("/applicant/upload/profile")
+    public CommonResult<?> uploadProfile(@RequestParam("phone") String phone,
+                                         @RequestPart MultipartFile profile) {
+        CommonResult<?> result;
+        try {
+            String profileUrl = applicantService.uploadProfile(phone, profile);
+            if (profileUrl == null) {
+                result = CommonResult.failure("");
+                return result;
+            }
+            result = CommonResult.success(profileUrl);
         } catch (Exception e) {
             e.printStackTrace();
             result = CommonResult.failure("");

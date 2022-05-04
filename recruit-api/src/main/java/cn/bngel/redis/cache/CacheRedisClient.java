@@ -5,7 +5,6 @@ import cn.bngel.pojo.Constant;
 import cn.bngel.redis.SimpleRedisClient;
 import cn.bngel.util.SerializeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 

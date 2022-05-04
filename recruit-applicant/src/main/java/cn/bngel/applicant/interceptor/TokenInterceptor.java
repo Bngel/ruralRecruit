@@ -3,7 +3,6 @@ package cn.bngel.applicant.interceptor;
 import cn.bngel.pojo.CommonResult;
 import cn.bngel.redis.token.TokenClient;
 import cn.bngel.redis.token.TokenRedisClient;
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -21,7 +20,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String json = JSONUtil.toJsonStr(CommonResult.authError());
         try {
-            String token = request.getHeader("Authentication");
+            String token = request.getHeader("Authorization");
             if (token == null || !tokenClient.verifyToken(token)) {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json; charset=utf-8");

@@ -5,6 +5,7 @@ import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.http.HttpProtocol;
+import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
@@ -24,35 +25,15 @@ import java.io.IOException;
 @Component
 public class TencentCloudClient {
 
-    @Value("${tencent-cloud.SecretId}")
-    private String secretId;
-
-    @Value("${tencent-cloud.SecretKey}")
-    private String secretKey;
-
-    @Value("${tencent-cloud.region}")
-    private String region;
-
-    @Value("${tencent-cloud.APPID}")
-    private String appId;
-
-    @Value("${tencent-cloud-sms.sdkAppId}")
-    private String sdkAppId;
-
-    @Value("${tencent-cloud-sms.signName}")
-    private String signName;
-
-    @Value("${tencent-cloud-sms.templateId}")
-    private String templateId;
-
     public String uploadFile(MultipartFile file, String bucket, String cosPath) throws IOException {
+        bucket = bucket + "-" + appId;
         COSClient cosClient = getCosClient();
         String filepath = System.getProperty("user.dir");
         String fileName = file.getOriginalFilename();
         File dest = new File(filepath + '\\' + fileName);
         file.transferTo(dest);
         cosClient.putObject(bucket, cosPath, dest);
-        return cosPath;
+        return cosUrl + "/" + cosPath;
     }
 
     public String sendMessage(String area, String phone, String code) throws TencentCloudSDKException {
@@ -85,6 +66,31 @@ public class TencentCloudClient {
         }
         return "";
     }
+
+
+    @Value("${tencent-cloud.SecretId}")
+    private String secretId;
+
+    @Value("${tencent-cloud.SecretKey}")
+    private String secretKey;
+
+    @Value("${tencent-cloud.region}")
+    private String region;
+
+    @Value("${tencent-cloud.APPID}")
+    private String appId;
+
+    @Value("${tencent-cloud.cos-url}")
+    private String cosUrl;
+
+    @Value("${tencent-cloud-sms.sdkAppId}")
+    private String sdkAppId;
+
+    @Value("${tencent-cloud-sms.signName}")
+    private String signName;
+
+    @Value("${tencent-cloud-sms.templateId}")
+    private String templateId;
 
     private COSClient getCosClient() {
         COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);

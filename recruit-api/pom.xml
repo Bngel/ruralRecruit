@@ -20,7 +20,6 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>4.2.2</version>
         </dependency>
         <dependency>
             <groupId>com.qcloud</groupId>
@@ -32,6 +31,11 @@
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java</artifactId>
             <version>3.1.270</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.7.14</version>
         </dependency>
     </dependencies>
 </project>

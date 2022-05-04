@@ -110,6 +110,16 @@ public class ApplicantServiceImpl implements ApplicantService {
         Applicant applicant = null;
         if (code.equals(cacheCode)) {
             applicant = getApplicant(phone);
+            if (applicant == null) {
+                Applicant newApplicant = new Applicant();
+                newApplicant.setPhone(phone);
+                newApplicant.setNickName(phone);
+                int register = saveApplicant(newApplicant);
+                if (register == 0) {
+                    return null;
+                }
+                applicant = newApplicant;
+            }
             redisClient.del(LOGIN_CODE_KEY);
         }
         return applicant;
@@ -123,7 +133,8 @@ public class ApplicantServiceImpl implements ApplicantService {
         // 创建一个六位数的短信验证码
         String code = String.valueOf(new Random().nextInt(900000) + 100000);
         try {
-            String cacheCode = redisClient.set(Constant.CACHE_APPLICANT_LOGIN + phone, code);
+            String cacheCode = redisClient.setex(Constant.CACHE_APPLICANT_LOGIN + phone,
+                    Constant.CACHE_EXPIRE_LOGIN_CODE, code);
             if (cacheCode == null) {
                 return null;
             }

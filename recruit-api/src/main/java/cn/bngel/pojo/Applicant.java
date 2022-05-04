@@ -48,4 +48,13 @@ public class Applicant implements Serializable {
     private Integer desiredSalary;
     @ApiModelProperty(value = "求职状态", dataType = "Integer", required = true)
     private Integer applyStatus;
+
+    /**
+     * 创建新用户时提供手机号
+     * @param phone 手机号
+     */
+    public Applicant(String phone) {
+        this.phone = phone;
+        this.nickName = phone;
+    }
 }

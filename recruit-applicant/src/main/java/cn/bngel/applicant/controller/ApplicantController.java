@@ -4,6 +4,8 @@ import cn.bngel.applicant.service.ApplicantService;
 import cn.bngel.pojo.Applicant;
 import cn.bngel.pojo.CommonResult;
 import cn.bngel.pojo.Constant;
+import cn.bngel.redis.token.TokenClient;
+import cn.hutool.json.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,9 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Api(tags = "用户模块 - 求职者")
@@ -174,6 +178,8 @@ public class ApplicantController {
                 return result;
             }
             result = CommonResult.success(applicant);
+            String token = getToken(getTokenMap(applicant));
+            result.setMessage(token);
         } catch (Exception e) {
             e.printStackTrace();
             result = CommonResult.failure(new Applicant());
@@ -205,4 +211,28 @@ public class ApplicantController {
         }
         return result;
     }
+
+    @Autowired
+    private TokenClient tokenClient;
+
+    private Map<String,Object> getTokenMap(Applicant applicant){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", applicant.getPhone());
+        map.put("phone", applicant.getPhone());
+        map.put("loginType", Constant.LOGIN_TYPE_APPLICANT);
+        return map;
+    }
+
+    private String getToken(Map<String, Object> map) {
+        JSONObject json = new JSONObject();
+        String id = (String) map.get("id");
+        if (id == null) {
+            return null;
+        }
+        for (String key: map.keySet()) {
+            json.set(key, map.get(key));
+        }
+        return tokenClient.refreshToken(id, json.toString());
+    }
+
 }

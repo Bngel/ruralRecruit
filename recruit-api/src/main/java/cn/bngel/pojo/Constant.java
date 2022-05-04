@@ -32,9 +32,18 @@ public class Constant {
     public static final int CACHE_EXPIRE_TIME_MAX = 3600;
     // 短信验证码有效时间(默认5分钟)
     public static final int CACHE_EXPIRE_LOGIN_CODE = 5 * 60;
+    // Token有效时间
+    public static final int CACHE_EXPIRE_TOKEN = 24 * 60 * 60;
+
     // Applicant 部分
     public static final String CACHE_APPLICANT = "CACHE_APPLICANT:";
     public static final String CACHE_APPLICANT_APPLYING = "CACHE_APPLICANT:APPLYING";
     public static final String CACHE_APPLICANT_LOGIN = "CACHE_APPLICANT_LOGIN:";
+    public static final String CACHE_APPLICANT_TOKEN = "CACHE_APPLICANT_TOKEN:";
+    public static final String CACHE_APPLICANT_TOKEN_SALT = "CACHE_APPLICANT_TOKEN_SALT";
+
+    // LoginType 常量: 登录类型
+    public static final int LOGIN_TYPE_APPLICANT = 0;
+    public static final int LOGIN_TYPE_EMPLOYER = 1;
 
 }

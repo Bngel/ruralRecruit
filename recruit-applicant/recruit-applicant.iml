@@ -47,6 +47,7 @@
     <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:javax.activation-api:1.2.0" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp:logging-interceptor:2.7.5" level="project" />
+    <orderEntry type="library" name="Maven: cn.hutool:hutool-all:5.7.14" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2.2.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba.spring:spring-context-support:1.0.10" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba.nacos:nacos-client:2.0.3" level="project" />

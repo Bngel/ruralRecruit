@@ -30,11 +30,41 @@
     </select>
 
     <insert id="saveApplicant">
-        INSERT INTO `recruit_applicant`(`phone`, `id_card`, `age`, `birthday`, `gender`, `real_name`, `nick_name`, `email`, `profile`, `address`,
-                                        `education`, `academy`, `major`, `desired_position`, `desired_salary`, `apply_status`) VALUES (
-                                        #{applicant.phone}, #{applicant.idCard}, #{applicant.age}, #{applicant.birthday}, #{applicant.gender}, #{applicant.realName},
-                                        #{applicant.nickName}, #{applicant.email}, #{applicant.profile}, #{applicant.address}, #{applicant.education}, #{applicant.academy},
-                                        #{applicant.major}, #{applicant.desiredPosition}, #{applicant.desiredSalary}, #{applicant.applyStatus});
+        INSERT INTO `recruit_applicant`(
+            <if test="applicant.phone!=null">`phone`</if>
+            <if test="applicant.idCard!=null">,`id_card`</if>
+            <if test="applicant.age!=null">,`age`</if>
+            <if test="applicant.birthday!=null">,`birthday`</if>
+            <if test="applicant.gender!=null">,`gender`</if>
+            <if test="applicant.realName!=null">,`real_name`</if>
+            <if test="applicant.nickName!=null">,`nick_name`</if>
+            <if test="applicant.email!=null">,`email`,</if>
+            <if test="applicant.profile!=null">,`profile`,</if>
+            <if test="applicant.address!=null">,`address`</if>
+            <if test="applicant.education!=null">,`education`</if>
+            <if test="applicant.academy!=null">,`academy` </if>
+            <if test="applicant.major!=null">,`major`</if>
+            <if test="applicant.desiredPosition!=null">,`desired_position`</if>
+            <if test="applicant.desiredSalary!=null">,`desired_salary`</if>
+            <if test="applicant.applyStatus!=null">,`apply_status`</if>
+        ) VALUES (
+            <if test="applicant.phone!=null">${applicant.phone}</if>
+            <if test="applicant.idCard!=null">,${applicant.idCard}</if>
+            <if test="applicant.age!=null">,${applicant.age}</if>
+            <if test="applicant.birthday!=null">,${applicant.birthday}</if>
+            <if test="applicant.gender!=null">,${applicant.gender}</if>
+            <if test="applicant.realName!=null">,${applicant.realName}</if>
+            <if test="applicant.nickName!=null">,${applicant.nickName}</if>
+            <if test="applicant.email!=null">,${applicant.email}</if>
+            <if test="applicant.profile!=null">,${applicant.profile}</if>
+            <if test="applicant.address!=null">,${applicant.address}</if>
+            <if test="applicant.education!=null">,${applicant.education}</if>
+            <if test="applicant.academy!=null">,${applicant.academy}</if>
+            <if test="applicant.major!=null">,${applicant.major}</if>
+            <if test="applicant.desiredPosition!=null">,${applicant.desiredPosition}</if>
+            <if test="applicant.desiredSalary!=null">,${applicant.desiredSalary}</if>
+            <if test="applicant.applyStatus!=null">,${applicant.applyStatus}</if>
+        );
     </insert>
 
     <delete id="removeApplicant">
@@ -44,23 +74,23 @@
     <update id="updateApplicant">
         UPDATE `recruit_applicant`
         <set>
-            <if test="applicant.idCard!=null">`id_card` = #{applicant.idCard}</if>
-            <if test="applicant.age!=null">`age` = #{applicant.age}</if>
-            <if test="applicant.birthday!=null">`birthday` = #{applicant.birthday}</if>
-            <if test="applicant.gender!=null">`gender` = #{applicant.gender}</if>
-            <if test="applicant.realName!=null">`real_name` = #{applicant.realName}</if>
-            <if test="applicant.nickName!=null">`nick_name` = #{applicant.nickName}</if>
-            <if test="applicant.email!=null">`email` = #{applicant.email}</if>
-            <if test="applicant.profile!=null">`profile` = #{applicant.profile}</if>
-            <if test="applicant.address!=null">`address` = #{applicant.address}</if>
-            <if test="applicant.education!=null">`education` = #{applicant.education}</if>
-            <if test="applicant.academy!=null">`academy` = #{applicant.academy}</if>
-            <if test="applicant.major!=null">`major` = #{applicant.major}</if>
-            <if test="applicant.desiredPosition!=null">`desired_position` = #{applicant.desiredPosition}</if>
-            <if test="applicant.desiredSalary!=null">`desired_salary` = #{applicant.desiredSalary}</if>
-            <if test="applicant.applyStatus!=null">`apply_status` = #{applicant.applyStatus}</if>
+            <if test="applicant.idCard!=null">`id_card` = ${applicant.idCard}</if>
+            <if test="applicant.age!=null">`age` = ${applicant.age}</if>
+            <if test="applicant.birthday!=null">`birthday` = ${applicant.birthday}</if>
+            <if test="applicant.gender!=null">`gender` = ${applicant.gender}</if>
+            <if test="applicant.realName!=null">`real_name` = ${applicant.realName}</if>
+            <if test="applicant.nickName!=null">`nick_name` = ${applicant.nickName}</if>
+            <if test="applicant.email!=null">`email` = ${applicant.email}</if>
+            <if test="applicant.profile!=null">`profile` = ${applicant.profile}</if>
+            <if test="applicant.address!=null">`address` = ${applicant.address}</if>
+            <if test="applicant.education!=null">`education` = ${applicant.education}</if>
+            <if test="applicant.academy!=null">`academy` = ${applicant.academy}</if>
+            <if test="applicant.major!=null">`major` = ${applicant.major}</if>
+            <if test="applicant.desiredPosition!=null">`desired_position` = ${applicant.desiredPosition}</if>
+            <if test="applicant.desiredSalary!=null">`desired_salary` = ${applicant.desiredSalary}</if>
+            <if test="applicant.applyStatus!=null">`apply_status` = ${applicant.applyStatus}</if>
         </set>
-        WHERE `phone` = #{applicant.phone};
+        WHERE `phone` = ${applicant.phone};
     </update>
 
 </mapper>

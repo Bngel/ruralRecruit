@@ -1,9 +1,9 @@
-package cn.bngel.resume.service;
+package cn.bngel.applicant.service;
 
 import cn.bngel.pojo.Constant;
 import cn.bngel.pojo.WorkExperience;
 import cn.bngel.redis.cache.CacheClient;
-import cn.bngel.resume.dao.WorkExperienceDao;
+import cn.bngel.applicant.dao.WorkExperienceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

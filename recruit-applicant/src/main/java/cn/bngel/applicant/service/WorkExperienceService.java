@@ -1,13 +1,11 @@
-package cn.bngel.resume.dao;
+package cn.bngel.applicant.service;
 
 import cn.bngel.pojo.WorkExperience;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-@Mapper
-public interface WorkExperienceDao {
+public interface WorkExperienceService {
 
     /**
      * 通过工作经历主键id获取求职者具体工作经历

@@ -1,9 +1,9 @@
-package cn.bngel.resume.controller;
+package cn.bngel.applicant.controller;
 
 import cn.bngel.pojo.WorkExperience;
 import cn.bngel.pojo.CommonResult;
 import cn.bngel.pojo.Constant;
-import cn.bngel.resume.service.WorkExperienceService;
+import cn.bngel.applicant.service.WorkExperienceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@Api(tags = "招聘模块 - 工作经历")
+@Api(tags = "用户模块 - 工作经历")
 public class WorkExperienceController {
 
     /**

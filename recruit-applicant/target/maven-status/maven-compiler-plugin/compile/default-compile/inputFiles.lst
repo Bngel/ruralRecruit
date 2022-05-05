@@ -1,10 +1,14 @@
+D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\config\InterceptorConfiguration.java
+D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\service\WorkExperienceService.java
+D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\interceptor\TokenInterceptor.java
+D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\dao\WorkExperienceDao.java
+D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\config\TencentCloudConfiguration.java
 D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\config\Knife4jConfiguration.java
 D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\ApplicantApplication.java
 D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\dao\ApplicantDao.java
-D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\config\InterceptorConfiguration.java
 D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\service\ApplicantServiceImpl.java
 D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\config\RedisConfiguration.java
 D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\controller\ApplicantController.java
-D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\interceptor\TokenInterceptor.java
-D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\config\TencentCloudConfiguration.java
+D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\service\WorkExperienceServiceImpl.java
+D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\controller\WorkExperienceController.java
 D:\git\JAVA\Project\ruralRecruit\recruit-applicant\src\main\java\cn\bngel\applicant\service\ApplicantService.java

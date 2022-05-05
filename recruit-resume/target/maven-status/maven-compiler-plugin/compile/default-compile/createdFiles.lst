@@ -1,0 +1,10 @@
+cn\bngel\resume\interceptor\ApplicantTokenInterceptor.class
+cn\bngel\resume\dao\ResumeDao.class
+cn\bngel\resume\interceptor\EmployerTokenInterceptor.class
+cn\bngel\resume\service\ResumeServiceImpl.class
+cn\bngel\resume\ResumeApplication.class
+cn\bngel\resume\controller\ResumeController.class
+cn\bngel\resume\config\Knife4jConfiguration.class
+cn\bngel\resume\config\InterceptorConfiguration.class
+cn\bngel\resume\config\RedisConfiguration.class
+cn\bngel\resume\service\ResumeService.class

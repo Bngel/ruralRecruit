@@ -45,7 +45,7 @@ public class RedisConfiguration {
 
     @Bean
     public CacheClient cacheClient() {
-        return new CacheRedisClient();
+        return new CacheRedisClient(simpleRedisClient());
     }
 
 }

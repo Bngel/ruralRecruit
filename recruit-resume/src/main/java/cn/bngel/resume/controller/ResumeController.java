@@ -151,8 +151,8 @@ public class ResumeController {
      * @param resume 需要修改的简历状态信息(做标记)
      * @return 修改成功则返回修改后的数据, 否则返回空求职者简历状态信息
      */
-    @ApiOperation(value = "Resume - 修改简历状态信息")
-    @PutMapping("/resume")
+    @ApiOperation(value = "Resume - 修改简历状态信息(打标记)")
+    @PutMapping("/resume/employer")
     public CommonResult<?> updateResume(@RequestBody Resume resume) {
         CommonResult<?> result;
         try {

@@ -23,7 +23,7 @@ public class WorkExperienceController {
      * @return 工作经历
      */
     @ApiOperation(value = "WorkExperience - 获取求职者工作经历")
-    @GetMapping("/workExperience")
+    @GetMapping("/workExperience/applicant")
     public CommonResult<?> getWorkExperience(@RequestParam("id") Integer id) {
         CommonResult<?> result;
         try {
@@ -48,7 +48,7 @@ public class WorkExperienceController {
      * @return 求职者工作经历列表
      */
     @ApiOperation(value = "WorkExperience - 获取求职者的所有工作经历")
-    @GetMapping("/workExperience/applicant")
+    @GetMapping("/workExperience/applicant/applicant")
     public CommonResult<?> listWorkExperiences(@RequestParam("phone") String phone) {
         CommonResult<?> result;
         try {
@@ -73,7 +73,7 @@ public class WorkExperienceController {
      * @return 成功则返回传入的求职者工作经历, 失败则返回空求职者工作经历
      */
     @ApiOperation(value = "WorkExperience - 新建求职者工作经历")
-    @PostMapping("/workExperience")
+    @PostMapping("/workExperience/applicant")
     public CommonResult<?> saveWorkExperience(@RequestBody WorkExperience workExperience) {
         CommonResult<?> result;
         try {
@@ -97,7 +97,7 @@ public class WorkExperienceController {
      * @return 成功则返回被删除的求职者工作经历, 失败则返回空求职者工作经历
      */
     @ApiOperation(value = "WorkExperience - 删除求职者工作经历")
-    @DeleteMapping("/workExperience")
+    @DeleteMapping("/workExperience/applicant")
     public CommonResult<?> removeWorkExperience(@RequestParam("id") Integer id) {
         CommonResult<?> result;
         try {
@@ -127,7 +127,7 @@ public class WorkExperienceController {
      * @return 修改成功则返回修改后的数据, 否则返回空求职者工作经历
      */
     @ApiOperation(value = "WorkExperience - 修改求职者工作经历")
-    @PutMapping("/workExperience")
+    @PutMapping("/workExperience/applicant")
     public CommonResult<?> updateWorkExperience(@RequestBody WorkExperience workExperience) {
         CommonResult<?> result;
         try {

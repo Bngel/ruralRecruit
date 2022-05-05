@@ -29,7 +29,7 @@ public class ApplicantController {
      * @return 求职者详细信息
      */
     @ApiOperation(value = "Applicant - 获取求职者信息")
-    @GetMapping("/applicant")
+    @GetMapping("/applicant/applicant")
     public CommonResult<?> getApplicant(@RequestParam("phone") String phone) {
         CommonResult<?> result;
         try {
@@ -53,7 +53,7 @@ public class ApplicantController {
      * @return 求职者列表
      */
     @ApiOperation(value = "Applicant - 获取正在求职的求职者列表")
-    @GetMapping("/applicant/applying")
+    @GetMapping("/applicant/employer/applying")
     public CommonResult<?> listApplicantsByApplyStatus() {
         CommonResult<?> result;
         try {
@@ -78,7 +78,7 @@ public class ApplicantController {
      * @return 成功则返回传入的求职者信息, 失败则返回空求职者信息
      */
     @ApiOperation(value = "Applicant - 注册求职者")
-    @PostMapping("/applicant")
+    @PostMapping("/applicant/applicant")
     public CommonResult<?> saveApplicant(@RequestBody Applicant applicant) {
         CommonResult<?> result;
         try {
@@ -109,7 +109,7 @@ public class ApplicantController {
      * @return 成功则返回被注销的求职者信息, 失败则返回空求职者信息
      */
     @ApiOperation(value = "Applicant - 注销求职者")
-    @DeleteMapping("/applicant")
+    @DeleteMapping("/applicant/applicant")
     public CommonResult<?> removeApplicant(@RequestParam("phone") String phone) {
         CommonResult<?> result;
         try {
@@ -139,7 +139,7 @@ public class ApplicantController {
      * @return 修改成功则返回修改后的数据, 否则返回空求职者信息
      */
     @ApiOperation(value = "Applicant - 修改求职者信息")
-    @PutMapping("/applicant")
+    @PutMapping("/applicant/applicant")
     public CommonResult<?> updateApplicant(@RequestBody Applicant applicant) {
         CommonResult<?> result;
         try {
@@ -221,7 +221,7 @@ public class ApplicantController {
      * @return 成功上传则返回头像URL, 否则返回空串
      */
     @ApiOperation(value = "Applicant - 上传头像")
-    @PostMapping("/applicant/upload/profile")
+    @PostMapping("/applicant/applicant/upload/profile")
     public CommonResult<?> uploadProfile(@RequestParam("phone") String phone,
                                          @RequestPart MultipartFile profile) {
         CommonResult<?> result;

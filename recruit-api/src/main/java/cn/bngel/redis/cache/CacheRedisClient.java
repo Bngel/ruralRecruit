@@ -10,8 +10,9 @@ import java.util.*;
 
 public class CacheRedisClient implements CacheClient{
 
-    @Autowired
-    private SimpleRedisClient redisClient;
+    public CacheRedisClient(SimpleRedisClient redisClient) {
+        this.redisClient = redisClient;
+    }
 
     /**
      * 通过key在Redis中尝试获取缓存
@@ -132,4 +133,7 @@ public class CacheRedisClient implements CacheClient{
             e.printStackTrace();
         }
     }
+
+    private SimpleRedisClient redisClient;
+
 }

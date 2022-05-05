@@ -1,4 +1,4 @@
-package cn.bngel.employer.interceptor;
+package cn.bngel.applicant.interceptor;
 
 import cn.bngel.pojo.CommonResult;
 import cn.bngel.pojo.Constant;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
-public class TokenInterceptor implements HandlerInterceptor {
+public class ApplicantTokenInterceptor implements HandlerInterceptor {
 
     @Autowired
     private TokenClient tokenClient;
@@ -23,8 +23,8 @@ public class TokenInterceptor implements HandlerInterceptor {
         try {
             String token = request.getHeader("Authorization");
             JSONObject jsonObject = new JSONObject();
-            jsonObject.set(Constant.TOKEN_PARAM_LOGIN_TYPE, Constant.LOGIN_TYPE_EMPLOYER);
-            if (token == null || !tokenClient.verifyToken(token)) {
+            jsonObject.set(Constant.TOKEN_PARAM_LOGIN_TYPE, Constant.LOGIN_TYPE_APPLICANT);
+            if (token == null || !tokenClient.verifyToken(token, jsonObject)) {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json; charset=utf-8");
                 PrintWriter writer = response.getWriter();

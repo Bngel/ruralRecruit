@@ -1,6 +1,7 @@
+cn\bngel\employer\interceptor\ApplicantTokenInterceptor.class
 cn\bngel\employer\controller\EmployerController.class
+cn\bngel\employer\interceptor\EmployerTokenInterceptor.class
 cn\bngel\employer\dao\EmployerDao.class
-cn\bngel\employer\interceptor\TokenInterceptor.class
 cn\bngel\employer\service\EmployerServiceImpl.class
 cn\bngel\employer\config\Knife4jConfiguration.class
 cn\bngel\employer\config\RedisConfiguration.class

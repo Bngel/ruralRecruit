@@ -28,7 +28,7 @@ public class EmployerController {
      * @return 雇主详细信息
      */
     @ApiOperation(value = "Employer - 获取雇主信息")
-    @GetMapping("/employer")
+    @GetMapping("/employer/employer")
     public CommonResult<?> getEmployer(@RequestParam("phone") String phone) {
         CommonResult<?> result;
         try {
@@ -53,7 +53,7 @@ public class EmployerController {
      * @return 成功则返回传入的雇主信息, 失败则返回空雇主信息
      */
     @ApiOperation(value = "Employer - 注册雇主")
-    @PostMapping("/employer")
+    @PostMapping("/employer/employer")
     public CommonResult<?> saveEmployer(@RequestBody Employer employer) {
         CommonResult<?> result;
         try {
@@ -84,7 +84,7 @@ public class EmployerController {
      * @return 成功则返回被注销的雇主信息, 失败则返回空雇主信息
      */
     @ApiOperation(value = "Employer - 注销雇主")
-    @DeleteMapping("/employer")
+    @DeleteMapping("/employer/employer")
     public CommonResult<?> removeEmployer(@RequestParam("phone") String phone) {
         CommonResult<?> result;
         try {
@@ -114,7 +114,7 @@ public class EmployerController {
      * @return 修改成功则返回修改后的数据, 否则返回空雇主信息
      */
     @ApiOperation(value = "Employer - 修改雇主信息")
-    @PutMapping("/employer")
+    @PutMapping("/employer/employer")
     public CommonResult<?> updateEmployer(@RequestBody Employer employer) {
         CommonResult<?> result;
         try {
@@ -196,7 +196,7 @@ public class EmployerController {
      * @return 成功上传则返回头像URL, 否则返回空串
      */
     @ApiOperation(value = "Employer - 上传头像")
-    @PostMapping("/employer/upload/profile")
+    @PostMapping("/employer/employer/upload/profile")
     public CommonResult<?> uploadProfile(@RequestParam("phone") String phone,
                                          @RequestPart MultipartFile profile) {
         CommonResult<?> result;

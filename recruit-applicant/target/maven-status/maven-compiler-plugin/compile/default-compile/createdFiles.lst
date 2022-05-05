@@ -1,7 +1,11 @@
 cn\bngel\applicant\ApplicantApplication.class
 cn\bngel\applicant\config\InterceptorConfiguration.class
 cn\bngel\applicant\dao\ApplicantDao.class
+cn\bngel\applicant\service\WorkExperienceService.class
 cn\bngel\applicant\config\Knife4jConfiguration.class
+cn\bngel\applicant\dao\WorkExperienceDao.class
+cn\bngel\applicant\controller\WorkExperienceController.class
+cn\bngel\applicant\service\WorkExperienceServiceImpl.class
 cn\bngel\applicant\interceptor\TokenInterceptor.class
 cn\bngel\applicant\service\ApplicantService.class
 cn\bngel\applicant\config\TencentCloudConfiguration.class

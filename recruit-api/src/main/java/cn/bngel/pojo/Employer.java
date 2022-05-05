@@ -7,12 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "雇主")
-public class Employer {
+public class Employer implements Serializable {
     @ApiModelProperty(value = "手机号(默认登录账号)", dataType = "String", required = true)
     private String phone;
     @ApiModelProperty(value = "头像(个人雇主头像照片/企业雇主公司图标)(URL地址)", dataType = "String", required = true)

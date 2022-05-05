@@ -1,0 +1,27 @@
+server:
+  port: 13001
+
+spring:
+  application:
+    name: recruit-employer
+  jackson:
+    date-format: yyyy-MM-dd
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        extension-configs:
+          - recruit-datasource.yaml
+          - recruit-redis-config.yaml
+          - recruit-tencent-cloud-config.yaml
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml

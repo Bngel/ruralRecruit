@@ -154,7 +154,7 @@ public class ApplicantServiceImpl implements ApplicantService {
     @Override
     public String uploadProfile(String phone, MultipartFile profile) throws IOException{
         String bucketName = "recruit-profile";
-        String profileUrl = tencentCloudClient.uploadFile(profile, bucketName, phone + "/profile.png");
+        String profileUrl = tencentCloudClient.uploadFile(profile, bucketName, phone + "/0-profile.png");
         if (profileUrl == null)
             return null;
         Applicant applicant = getApplicant(phone);

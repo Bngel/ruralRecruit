@@ -46,6 +46,12 @@ public class Constant {
     public static final String CACHE_APPLICANT_TOKEN = "CACHE_APPLICANT_TOKEN:";
     public static final String CACHE_APPLICANT_TOKEN_SALT = "CACHE_APPLICANT_TOKEN_SALT";
 
+    // Employer 部分
+    public static final String CACHE_EMPLOYER = "CACHE_EMPLOYER:";
+    public static final String CACHE_EMPLOYER_LOGIN = "CACHE_EMPLOYER_LOGIN:";
+    public static final String CACHE_EMPLOYER_TOKEN = "CACHE_EMPLOYER_TOKEN:";
+    public static final String CACHE_EMPLOYER_TOKEN_SALT = "CACHE_EMPLOYER_TOKEN_SALT";
+
     // LoginType 常量: 登录类型
     public static final int LOGIN_TYPE_APPLICANT = 0;
     public static final int LOGIN_TYPE_EMPLOYER = 1;

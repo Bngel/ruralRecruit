@@ -7,12 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "职位信息")
-public class Job {
+public class Job implements Serializable {
     @ApiModelProperty(value = "雇主手机号(雇主表主键)", dataType = "String", required = true)
     private String phone;
     @ApiModelProperty(value = "职位名称", dataType = "String", required = true)

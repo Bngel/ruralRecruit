@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Data
@@ -14,7 +15,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "工作经历")
-public class WorkExperience {
+public class WorkExperience implements Serializable {
     @ApiModelProperty(value = "工作开始时间(精确到月)", dataType = "Date", required = true)
     private Date startTime;
     @ApiModelProperty(value = "工作结束时间(精确到月)", dataType = "Date", required = true)

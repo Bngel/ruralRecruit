@@ -22,8 +22,20 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
-@Component
 public class TencentCloudClient {
+
+
+    public TencentCloudClient(String secretId, String secretKey, String region, String appId,
+                              String cosUrl, String sdkAppId, String signName, String templateId) {
+        this.secretId = secretId;
+        this.secretKey = secretKey;
+        this.region = region;
+        this.appId = appId;
+        this.cosUrl = cosUrl;
+        this.sdkAppId = sdkAppId;
+        this.signName = signName;
+        this.templateId = templateId;
+    }
 
     public String uploadFile(MultipartFile file, String bucket, String cosPath) throws IOException {
         bucket = bucket + "-" + appId;
@@ -68,28 +80,13 @@ public class TencentCloudClient {
     }
 
 
-    @Value("${tencent-cloud.SecretId}")
     private String secretId;
-
-    @Value("${tencent-cloud.SecretKey}")
     private String secretKey;
-
-    @Value("${tencent-cloud.region}")
     private String region;
-
-    @Value("${tencent-cloud.APPID}")
     private String appId;
-
-    @Value("${tencent-cloud.cos-url}")
     private String cosUrl;
-
-    @Value("${tencent-cloud-sms.sdkAppId}")
     private String sdkAppId;
-
-    @Value("${tencent-cloud-sms.signName}")
     private String signName;
-
-    @Value("${tencent-cloud-sms.templateId}")
     private String templateId;
 
     private COSClient getCosClient() {

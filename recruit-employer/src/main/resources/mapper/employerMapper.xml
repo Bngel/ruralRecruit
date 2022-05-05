@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bngel.employer.dao.EmployerDao">
+
+    <resultMap id="employer" type="cn.bngel.pojo.Employer">
+        <id column="phone" jdbcType="VARCHAR" javaType="String" property="phone"/>
+        <result column="profile" jdbcType="VARCHAR" javaType="String" property="profile"/>
+        <result column="name" jdbcType="VARCHAR" javaType="String" property="name"/>
+        <result column="certification" jdbcType="TINYINT" javaType="Integer" property="certification"/>
+        <result column="email" jdbcType="VARCHAR" javaType="String" property="email"/>
+    </resultMap>
+
+    <select id="getEmployer" resultMap="employer">
+        SELECT * FROM `recruit_employer` WHERE `phone` = #{phone};
+    </select>
+
+    <delete id="removeEmployer">
+        DELETE FROM `recruit_employer` WHERE `phone` = #{phone};
+    </delete>
+
+    <insert id="saveEmployer">
+        INSERT INTO `recruit_employer`(
+            <if test="employer.phone!=null">`phone`</if>
+            <if test="employer.profile!=null">,`profile`</if>
+            <if test="employer.name!=null">,`name`</if>
+            <if test="employer.certification!=null">,`certification`</if>
+            <if test="employer.email!=null">,`email`</if>
+        ) VALUES (
+            <if test="employer.phone!=null">#{employer.phone}</if>
+            <if test="employer.profile!=null">,#{employer.profile}</if>
+            <if test="employer.name!=null">,#{employer.name}</if>
+            <if test="employer.certification!=null">,#{employer.certification}</if>
+            <if test="employer.email!=null">,#{employer.email}</if>
+        );
+    </insert>
+
+    <update id="updateEmployer">
+        UPDATE `recruit_employer`
+        <set>
+            <if test="employer.phone!=null">`phone`=#{employer.phone}</if>
+            <if test="employer.profile!=null">,`profile`=#{employer.profile}</if>
+            <if test="employer.name!=null">,`name`=#{employer.name}</if>
+            <if test="employer.certification!=null">,`certification`=#{employer.certification}</if>
+            <if test="employer.email!=null">,`email`=#{employer.email}</if>
+        </set>
+        WHERE `phone` = #{employer.phone};
+    </update>
+</mapper>

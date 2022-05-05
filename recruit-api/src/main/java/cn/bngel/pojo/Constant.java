@@ -60,6 +60,11 @@ public class Constant {
     public static final String CACHE_JOB = "CACHE_JOB:";
     public static final String CACHE_JOB_EMPLOYER = "CACHE_JOB_EMPLOYER:";
 
+    // Resume 部分
+    public static final String CACHE_WORK_EXPERIENCE = "CACHE_WORK_EXPERIENCE:";
+    public static final String CACHE_WORK_EXPERIENCE_APPLICANT = "CACHE_WORK_EXPERIENCE_APPLICANT:";
+    public static final String CACHE_RESUME = "CACHE_RESUME:";
+
     // LoginType 常量: 登录类型
     public static final int LOGIN_TYPE_APPLICANT = 0;
     public static final int LOGIN_TYPE_EMPLOYER = 1;

@@ -1,9 +1,8 @@
-package cn.bngel.applicant.interceptor;
+package cn.bngel.resume.interceptor;
 
 import cn.bngel.pojo.CommonResult;
 import cn.bngel.pojo.Constant;
 import cn.bngel.redis.token.TokenClient;
-import cn.bngel.redis.token.TokenRedisClient;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         String json = JSONUtil.toJsonStr(CommonResult.authError());
         try {
             String token = request.getHeader("Authorization");
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.set(Constant.TOKEN_PARAM_LOGIN_TYPE, Constant.LOGIN_TYPE_APPLICANT);
-            if (token == null || !tokenClient.verifyToken(token, jsonObject)) {
+            if (token == null || !tokenClient.verifyToken(token)) {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json; charset=utf-8");
                 PrintWriter writer = response.getWriter();

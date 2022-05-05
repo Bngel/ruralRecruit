@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bngel.resume.dao.WorkExperienceDao">
+
+    <resultMap id="workExperience" type="cn.bngel.pojo.WorkExperience">
+        <id column="id" jdbcType="INTEGER" javaType="Integer" property="id"/>
+        <result column="start_time" jdbcType="BIGINT" javaType="Long" property="startTime"/>
+        <result column="end_time" jdbcType="BIGINT" javaType="Long" property="endTime"/>
+        <result column="address" jdbcType="VARCHAR" javaType="String" property="address"/>
+        <result column="description" jdbcType="VARCHAR" javaType="String" property="description"/>
+        <result column="app_phone" jdbcType="VARCHAR" javaType="String" property="appPhone"/>
+    </resultMap>
+
+    <select id="getWorkExperience" resultMap="workExperience">
+        SELECT * FROM `recruit_work_experience` WHERE `id` = #{id};
+    </select>
+
+    <select id="listWorkExperiences" resultMap="workExperience">
+        SELECT * FROM `recruit_work_experience` WHERE `app_phone` = #{phone};
+    </select>
+
+    <delete id="removeWorkExperience">
+        DELETE FROM `recruit_work_experience` WHERE `id` = #{id};
+    </delete>
+
+    <insert id="saveWorkExperience" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `recruit_work_experience` (
+            <if test="workExperience.id!=null">`id`</if>
+            <if test="workExperience.startTime!=null">,`start_time`</if>
+            <if test="workExperience.endTime!=null">,`end_time`</if>
+            <if test="workExperience.address!=null">,`address`</if>
+            <if test="workExperience.description!=null">,`description`</if>
+            <if test="workExperience.appPhone!=null">,`app_phone`</if>
+        ) VALUES (
+            <if test="workExperience.id!=null">#{workExperience.id}</if>
+            <if test="workExperience.startTime!=null">,#{workExperience.startTime}</if>
+            <if test="workExperience.endTime!=null">,#{workExperience.endTime}</if>
+            <if test="workExperience.address!=null">,#{workExperience.address}</if>
+            <if test="workExperience.description!=null">,#{workExperience.description}</if>
+            <if test="workExperience.appPhone!=null">,#{workExperience.appPhone}</if>
+        );
+    </insert>
+
+    <update id="updateWorkExperience">
+        UPDATE `recruit_work_experience`
+        <set>
+            <if test="workExperience.id!=null">`id`=#{workExperience.id}</if>
+            <if test="workExperience.startTime!=null">,`start_time`=#{workExperience.startTime}</if>
+            <if test="workExperience.endTime!=null">,`end_time`=#{workExperience.endTime}</if>
+            <if test="workExperience.address!=null">,`address`=#{workExperience.address}</if>
+            <if test="workExperience.description!=null">,`description`=#{workExperience.description}</if>
+            <if test="workExperience.appPhone!=null">,`app_phone`=#{workExperience.appPhone}</if>
+        </set>
+        WHERE `id` = #{workExperience.id};
+    </update>
+
+
+</mapper>

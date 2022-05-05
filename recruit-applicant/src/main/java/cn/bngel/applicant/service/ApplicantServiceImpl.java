@@ -51,7 +51,9 @@ public class ApplicantServiceImpl implements ApplicantService {
             return target;
         }
         List<Applicant> applicants = applicantDao.listApplicantsByApplyStatus();
-        cacheClient.setCaches(Constant.CACHE_APPLICANT_APPLYING, applicants);
+        if (applicants != null) {
+            cacheClient.setCaches(Constant.CACHE_APPLICANT_APPLYING, applicants);
+        }
         return applicants;
     }
 

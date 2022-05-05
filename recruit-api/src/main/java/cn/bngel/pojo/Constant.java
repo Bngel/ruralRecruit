@@ -39,18 +39,26 @@ public class Constant {
     // Token有效时间
     public static final int CACHE_EXPIRE_TOKEN = 24 * 60 * 60;
 
+    // Token 部分
+    public static final String CACHE_TOKEN = "CACHE_TOKEN:";
+    public static final String CACHE_TOKEN_SALT = "CACHE_TOKEN_SALT";
+    // Token Header 部分带有的参数
+    public static final String TOKEN_PARAM_ID = "TOKEN_PARAM_ID";
+    public static final String TOKEN_PARAM_LOGIN_TYPE = "TOKEN_PARAM_LOGIN_TYPE";
+    public static final String TOKEN_PARAM_PHONE = "TOKEN_PARAM_PHONE";
+
     // Applicant 部分
     public static final String CACHE_APPLICANT = "CACHE_APPLICANT:";
     public static final String CACHE_APPLICANT_APPLYING = "CACHE_APPLICANT:APPLYING";
     public static final String CACHE_APPLICANT_LOGIN = "CACHE_APPLICANT_LOGIN:";
-    public static final String CACHE_APPLICANT_TOKEN = "CACHE_APPLICANT_TOKEN:";
-    public static final String CACHE_APPLICANT_TOKEN_SALT = "CACHE_APPLICANT_TOKEN_SALT";
 
     // Employer 部分
     public static final String CACHE_EMPLOYER = "CACHE_EMPLOYER:";
     public static final String CACHE_EMPLOYER_LOGIN = "CACHE_EMPLOYER_LOGIN:";
-    public static final String CACHE_EMPLOYER_TOKEN = "CACHE_EMPLOYER_TOKEN:";
-    public static final String CACHE_EMPLOYER_TOKEN_SALT = "CACHE_EMPLOYER_TOKEN_SALT";
+
+    // Job 部分
+    public static final String CACHE_JOB = "CACHE_JOB:";
+    public static final String CACHE_JOB_EMPLOYER = "CACHE_JOB_EMPLOYER:";
 
     // LoginType 常量: 登录类型
     public static final int LOGIN_TYPE_APPLICANT = 0;

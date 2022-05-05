@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bngel.job.dao.JobDao">
+
+    <resultMap id="job" type="cn.bngel.pojo.Job">
+        <id column="id" jdbcType="INTEGER" javaType="Integer" property="id"/>
+        <result column="phone" jdbcType="VARCHAR" javaType="String" property="phone"/>
+        <result column="name" jdbcType="VARCHAR" javaType="String" property="name"/>
+        <result column="description" jdbcType="VARCHAR" javaType="String" property="description"/>
+        <result column="province" jdbcType="VARCHAR" javaType="String" property="province"/>
+        <result column="city" jdbcType="VARCHAR" javaType="String" property="city"/>
+        <result column="type" jdbcType="TINYINT" javaType="Integer" property="type"/>
+        <result column="requirement" jdbcType="VARCHAR" javaType="String" property="requirement"/>
+        <result column="salary" jdbcType="INTEGER" javaType="Integer" property="salary"/>
+        <result column="address" jdbcType="VARCHAR" javaType="String" property="address"/>
+        <result column="benefit" jdbcType="VARCHAR" javaType="String" property="benefit"/>
+    </resultMap>
+
+    <select id="getJob" resultMap="job">
+        SELECT * FROM `recruit_job` WHERE `id` = #{id};
+    </select>
+
+    <select id="listJobs" resultMap="job">
+        SELECT * FROM `recruit_job` WHERE `phone` = #{phone};
+    </select>
+
+    <delete id="removeJob">
+        DELETE FROM `recruit_job` WHERE `id` = #{id};
+    </delete>
+
+    <insert id="saveJob" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `recruit_job` (
+            <if test="job.phone!=null">`phone`</if>
+            <if test="job.name!=null">,`name`</if>
+            <if test="job.description!=null">,`description`</if>
+            <if test="job.province!=null">,`province`</if>
+            <if test="job.city!=null">,`city`</if>
+            <if test="job.type!=null">,`type`</if>
+            <if test="job.requirement!=null">,`requirement`</if>
+            <if test="job.salary!=null">,`salary`</if>
+            <if test="job.address!=null">,`address`</if>
+            <if test="job.benefit!=null">,`benefit`</if>
+        ) VALUES (
+            <if test="job.phone!=null">#{job.phone}</if>
+            <if test="job.name!=null">,#{job.name}</if>
+            <if test="job.description!=null">,#{job.description}</if>
+            <if test="job.province!=null">,#{job.province}</if>
+            <if test="job.city!=null">,#{job.city}</if>
+            <if test="job.type!=null">,#{job.type}</if>
+            <if test="job.requirement!=null">,#{job.requirement}</if>
+            <if test="job.salary!=null">,#{job.salary}</if>
+            <if test="job.address!=null">,#{job.address}</if>
+            <if test="job.benefit!=null">,#{job.benefit}</if>
+        );
+    </insert>
+
+    <update id="updateJob">
+        UPDATE `recruit_job`
+        <set>
+            <if test="job.phone!=null">`phone`=#{job.phone}</if>
+            <if test="job.name!=null">,`name`=#{job.name}</if>
+            <if test="job.description!=null">,`description`=#{job.description}</if>
+            <if test="job.province!=null">,`province`=#{job.province}</if>
+            <if test="job.city!=null">,`city`=#{job.city}</if>
+            <if test="job.type!=null">,`type`=#{job.type}</if>
+            <if test="job.requirement!=null">,`requirement`=#{job.requirement}</if>
+            <if test="job.salary!=null">,`salary`=#{job.salary}</if>
+            <if test="job.address!=null">,`address`=#{job.address}</if>
+            <if test="job.benefit!=null">,`benefit`=#{job.benefit}</if>
+        </set>
+        WHERE `phone` = #{job.phone};
+    </update>
+</mapper>

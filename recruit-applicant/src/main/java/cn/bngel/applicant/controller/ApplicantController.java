@@ -4,6 +4,7 @@ import cn.bngel.applicant.service.ApplicantService;
 import cn.bngel.pojo.Applicant;
 import cn.bngel.pojo.CommonResult;
 import cn.bngel.pojo.Constant;
+import cn.bngel.pojo.Employer;
 import cn.bngel.redis.token.TokenClient;
 import cn.hutool.json.JSONObject;
 import io.swagger.annotations.Api;
@@ -21,9 +22,6 @@ import java.util.Map;
 @RestController
 @Api(tags = "用户模块 - 求职者")
 public class ApplicantController {
-
-    @Autowired
-    private ApplicantService applicantService;
 
     /**
      * 根据手机号获取求职者详细信息
@@ -146,6 +144,10 @@ public class ApplicantController {
         CommonResult<?> result;
         try {
             String phone = applicant.getPhone();
+            if (phone == null) {
+                result = CommonResult.failure(new Applicant());
+                return result;
+            }
             int update = applicantService.updateApplicant(applicant);
             if (update == 0) {
                 result = CommonResult.failure(new Applicant());
@@ -239,19 +241,22 @@ public class ApplicantController {
     }
 
     @Autowired
+    private ApplicantService applicantService;
+
+    @Autowired
     private TokenClient tokenClient;
 
     private Map<String,Object> getTokenMap(Applicant applicant){
         HashMap<String, Object> map = new HashMap<>();
-        map.put("id", applicant.getPhone());
-        map.put("phone", applicant.getPhone());
-        map.put("loginType", Constant.LOGIN_TYPE_APPLICANT);
+        map.put(Constant.TOKEN_PARAM_ID, Constant.LOGIN_TYPE_APPLICANT + "-" + applicant.getPhone());
+        map.put(Constant.TOKEN_PARAM_PHONE, applicant.getPhone());
+        map.put(Constant.TOKEN_PARAM_LOGIN_TYPE, Constant.LOGIN_TYPE_APPLICANT);
         return map;
     }
 
     private String getToken(Map<String, Object> map) {
         JSONObject json = new JSONObject();
-        String id = (String) map.get("id");
+        String id = (String) map.get(Constant.TOKEN_PARAM_ID);
         if (id == null) {
             return null;
         }

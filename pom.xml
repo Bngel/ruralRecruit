@@ -10,7 +10,7 @@
         <module>recruit-applicant</module>
         <module>recruit-employer</module>
         <module>recruit-api</module>
-        <module>recruit-position</module>
+        <module>recruit-job</module>
         <module>recruit-resume</module>
     </modules>
     <name>ruralRecruit</name>

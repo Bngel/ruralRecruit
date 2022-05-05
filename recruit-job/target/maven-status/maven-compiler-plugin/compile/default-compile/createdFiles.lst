@@ -1,0 +1,10 @@
+cn\bngel\job\config\RedisConfiguration.class
+cn\bngel\job\service\JobServiceImpl.class
+cn\bngel\job\config\InterceptorConfiguration.class
+cn\bngel\job\interceptor\ApplicantTokenInterceptor.class
+cn\bngel\job\dao\JobDao.class
+cn\bngel\job\controller\JobController.class
+cn\bngel\job\service\JobService.class
+cn\bngel\job\interceptor\EmployerTokenInterceptor.class
+cn\bngel\job\config\Knife4jConfiguration.class
+cn\bngel\job\JobApplication.class

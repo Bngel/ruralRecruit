@@ -22,9 +22,6 @@ import java.util.Map;
 @Api(tags = "用户模块 - 雇主")
 public class EmployerController {
 
-    @Autowired
-    private EmployerService employerService;
-
     /**
      * 根据手机号获取雇主详细信息
      * @param phone 雇主手机号
@@ -122,6 +119,10 @@ public class EmployerController {
         CommonResult<?> result;
         try {
             String phone = employer.getPhone();
+            if (phone == null) {
+                result = CommonResult.failure(new Employer());
+                return result;
+            }
             int update = employerService.updateEmployer(employer);
             if (update == 0) {
                 result = CommonResult.failure(new Employer());
@@ -215,19 +216,22 @@ public class EmployerController {
     }
 
     @Autowired
+    private EmployerService employerService;
+
+    @Autowired
     private TokenClient tokenClient;
 
     private Map<String,Object> getTokenMap(Employer employer){
         HashMap<String, Object> map = new HashMap<>();
-        map.put("id", employer.getPhone());
-        map.put("phone", employer.getPhone());
-        map.put("loginType", Constant.LOGIN_TYPE_EMPLOYER);
+        map.put(Constant.TOKEN_PARAM_ID, Constant.LOGIN_TYPE_EMPLOYER + "-" + employer.getPhone());
+        map.put(Constant.TOKEN_PARAM_PHONE, employer.getPhone());
+        map.put(Constant.TOKEN_PARAM_LOGIN_TYPE, Constant.LOGIN_TYPE_EMPLOYER);
         return map;
     }
 
     private String getToken(Map<String, Object> map) {
         JSONObject json = new JSONObject();
-        String id = (String) map.get("id");
+        String id = (String) map.get(Constant.TOKEN_PARAM_ID);
         if (id == null) {
             return null;
         }

@@ -1,5 +1,10 @@
 package cn.bngel.redis.token;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+
+import java.util.Map;
+
 public interface TokenClient {
 
     /**
@@ -22,4 +27,12 @@ public interface TokenClient {
      * @return 合法返回 true, 不合法则返回false
      */
     boolean verifyToken(String token);
+
+    /**
+     * 判断token是否合法
+     * @param token token
+     * @param json 额外校验的部分
+     * @return 合法返回 true, 不合法则返回false
+     */
+    boolean verifyToken(String token, JSONObject json);
 }

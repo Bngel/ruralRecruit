@@ -15,6 +15,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ApiModel(value = "职位信息")
 public class Job implements Serializable {
+    @ApiModelProperty(value = "主键id", dataType = "Integer", required = true)
+    private Integer id;
     @ApiModelProperty(value = "雇主手机号(雇主表主键)", dataType = "String", required = true)
     private String phone;
     @ApiModelProperty(value = "职位名称", dataType = "String", required = true)

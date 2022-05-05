@@ -10,16 +10,18 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Map;
+
 public class TokenRedisClient implements TokenClient{
 
     @Override
     public String refreshToken(String key, String data) {
         // 将数据进行加密后得到实际的token存到redis中
         return (String) redisClient.sync(jedis -> {
-            String token = jedis.get(Constant.CACHE_APPLICANT_TOKEN + key);
+            String token = jedis.get(Constant.CACHE_TOKEN + key);
             if (token == null) {
                 token = getToken(data);
-                redisClient.set(Constant.CACHE_APPLICANT_TOKEN + key, token);
+                redisClient.set(Constant.CACHE_TOKEN + key, token);
             }
             return token;
         });
@@ -32,14 +34,38 @@ public class TokenRedisClient implements TokenClient{
 
     @Override
     public boolean verifyToken(String token) {
-        String salt = redisClient.get(Constant.CACHE_APPLICANT_TOKEN_SALT);
+        String salt = redisClient.get(Constant.CACHE_TOKEN_SALT);
         if (token == null || salt == null) {
             return false;
         }
         String decryptedToken = decryptToken(token, salt);
         JSONObject jsonObject = JSONUtil.toBean(decryptedToken, JSONObject.class);
-        String id = (String) jsonObject.get("id");
-        String cachedToken = redisClient.get(Constant.CACHE_APPLICANT_TOKEN + id);
+        String id = String.valueOf(jsonObject.get(Constant.TOKEN_PARAM_ID));
+        String cachedToken = redisClient.get(Constant.CACHE_TOKEN + id);
+        return token.equals(cachedToken);
+    }
+
+    @Override
+    public boolean verifyToken(String token, JSONObject json) {
+        String salt = redisClient.get(Constant.CACHE_TOKEN_SALT);
+        if (token == null || salt == null) {
+            return false;
+        }
+        String decryptedToken = decryptToken(token, salt);
+        JSONObject jsonObject = JSONUtil.toBean(decryptedToken, JSONObject.class);
+        for (Map.Entry<String, Object> entry : json.entrySet()) {
+            String key = entry.getKey();
+            String value = String.valueOf(entry.getValue());
+            if (!jsonObject.containsKey(key)) {
+                return false;
+            }
+            String valueForCheck = String.valueOf(jsonObject.get(key));
+            if (!value.equals(valueForCheck)) {
+                return false;
+            }
+        }
+        String id = (String) jsonObject.get(Constant.TOKEN_PARAM_ID);
+        String cachedToken = redisClient.get(Constant.CACHE_TOKEN + id);
         return token.equals(cachedToken);
     }
 
@@ -61,10 +87,10 @@ public class TokenRedisClient implements TokenClient{
      * @return token
      */
     private String getToken(String data) {
-        String salt = redisClient.get(Constant.CACHE_APPLICANT_TOKEN_SALT);
+        String salt = redisClient.get(Constant.CACHE_TOKEN_SALT);
         if (salt == null) {
             salt = createSalt();
-            redisClient.setex(Constant.CACHE_APPLICANT_TOKEN_SALT, Constant.CACHE_EXPIRE_TOKEN, salt);
+            redisClient.setex(Constant.CACHE_TOKEN_SALT, Constant.CACHE_EXPIRE_TOKEN, salt);
         }
         return encryptToken(data, salt);
     }

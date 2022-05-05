@@ -54,7 +54,7 @@ public class ApplicantController {
      */
     @ApiOperation(value = "Applicant - 获取正在求职的求职者列表")
     @GetMapping("/applicant/applying")
-    public CommonResult<?> listApplicantByApplyStatus() {
+    public CommonResult<?> listApplicantsByApplyStatus() {
         CommonResult<?> result;
         try {
             List<Applicant> applicant = applicantService.listApplicantsByApplyStatus();

@@ -22,7 +22,7 @@ public class JobController {
      * @return 职位详细信息
      */
     @ApiOperation(value = "Job - 获取职位信息")
-    @GetMapping("/applicant/job")
+    @GetMapping("/job/applicant")
     public CommonResult<?> getJob(@RequestParam("id") Integer id) {
         CommonResult<?> result;
         try {
@@ -46,7 +46,7 @@ public class JobController {
      * @return 职位列表
      */
     @ApiOperation(value = "Job - 获取特定雇主发布的职位列表")
-    @GetMapping("/applicant/job/employer")
+    @GetMapping("/job/applicant/employer")
     public CommonResult<?> listJobs(@RequestParam("phone") String phone) {
         CommonResult<?> result;
         try {
@@ -71,7 +71,7 @@ public class JobController {
      * @return 成功则返回传入的职位信息, 失败则返回空职位信息
      */
     @ApiOperation(value = "Job - 发布职位信息")
-    @PostMapping("/employer/job")
+    @PostMapping("/job/employer")
     public CommonResult<?> saveJob(@RequestBody Job job) {
         CommonResult<?> result;
         try {
@@ -95,7 +95,7 @@ public class JobController {
      * @return 成功则返回被删除的职位信息, 失败则返回空职位信息
      */
     @ApiOperation(value = "Job - 注销职位")
-    @DeleteMapping("/employer/job")
+    @DeleteMapping("/job/employer")
     public CommonResult<?> removeJob(@RequestParam("id") Integer id) {
         CommonResult<?> result;
         try {
@@ -125,7 +125,7 @@ public class JobController {
      * @return 修改成功则返回修改后的数据, 否则返回空职位信息
      */
     @ApiOperation(value = "Job - 修改职位信息")
-    @PutMapping("/employer/job")
+    @PutMapping("/job/employer")
     public CommonResult<?> updateJob(@RequestBody Job job) {
         CommonResult<?> result;
         try {

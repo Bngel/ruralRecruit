@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
-public class TokenInterceptor implements HandlerInterceptor {
+public class EmployerTokenInterceptor implements HandlerInterceptor {
 
     @Autowired
     private TokenClient tokenClient;
@@ -22,7 +22,9 @@ public class TokenInterceptor implements HandlerInterceptor {
         String json = JSONUtil.toJsonStr(CommonResult.authError());
         try {
             String token = request.getHeader("Authorization");
-            if (token == null || !tokenClient.verifyToken(token)) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.set(Constant.TOKEN_PARAM_LOGIN_TYPE, Constant.LOGIN_TYPE_EMPLOYER);
+            if (token == null || !tokenClient.verifyToken(token, jsonObject)) {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("application/json; charset=utf-8");
                 PrintWriter writer = response.getWriter();

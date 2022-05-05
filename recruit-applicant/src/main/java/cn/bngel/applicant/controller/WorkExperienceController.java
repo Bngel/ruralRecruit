@@ -49,7 +49,7 @@ public class WorkExperienceController {
      */
     @ApiOperation(value = "WorkExperience - 获取求职者的所有工作经历")
     @GetMapping("/workExperience/applicant")
-    public CommonResult<?> listWorkExperienceByApplyStatus(@RequestParam("phone") String phone) {
+    public CommonResult<?> listWorkExperiences(@RequestParam("phone") String phone) {
         CommonResult<?> result;
         try {
             List<WorkExperience> workExperience = workExperienceService.listWorkExperiences(phone);

@@ -64,6 +64,8 @@ public class Constant {
     public static final String CACHE_WORK_EXPERIENCE = "CACHE_WORK_EXPERIENCE:";
     public static final String CACHE_WORK_EXPERIENCE_APPLICANT = "CACHE_WORK_EXPERIENCE_APPLICANT:";
     public static final String CACHE_RESUME = "CACHE_RESUME:";
+    public static final String CACHE_RESUME_SENT = "CACHE_RESUME_SENT:";
+    public static final String CACHE_RESUME_RECEIVED = "CACHE_RESUME_RECEIVED:";
 
     // LoginType 常量: 登录类型
     public static final int LOGIN_TYPE_APPLICANT = 0;

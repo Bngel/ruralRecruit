@@ -5,6 +5,7 @@ import cn.bngel.util.InterceptorUtil;
 import cn.hutool.json.JSONObject;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
@@ -17,10 +18,13 @@ abstract class InterceptorTemplate implements HandlerInterceptor {
             String json = InterceptorUtil.DEFAULT_AUTH_ERROR_JSON;
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=utf-8");
-            PrintWriter writer = response.getWriter();
-            writer.append(json);
-            writer.close();
-            return preHandleEvent(request, response, handler);
+            if (!preHandleEvent(request, response, handler)){
+                ServletOutputStream outputStream = response.getOutputStream();
+                outputStream.print(json);
+                outputStream.close();
+                return false;
+            }
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

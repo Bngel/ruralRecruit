@@ -1,7 +1,8 @@
 package cn.bngel.employer.config;
 
-import cn.bngel.employer.interceptor.ApplicantTokenInterceptor;
-import cn.bngel.employer.interceptor.EmployerTokenInterceptor;
+import cn.bngel.interceptor.InterceptorFactory;
+import cn.bngel.redis.token.TokenClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -11,21 +12,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer {
 
-    @Bean
-    public EmployerTokenInterceptor employerTokenInterceptor() {
-        return new EmployerTokenInterceptor();
-    }
-
-    @Bean
-    public ApplicantTokenInterceptor applicantTokenInterceptor() {
-        return new ApplicantTokenInterceptor();
-    }
+    @Autowired
+    private TokenClient tokenClient;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(applicantTokenInterceptor())
+        registry.addInterceptor(InterceptorFactory.createEmployerTokenInterceptor(tokenClient))
                 .addPathPatterns("/employer/applicant/**");
-        registry.addInterceptor(employerTokenInterceptor())
+        registry.addInterceptor(InterceptorFactory.createApplicantTokenInterceptor(tokenClient))
                 .addPathPatterns("/employer/employer/**")
                 .excludePathPatterns("/employer/login/**");
     }

@@ -1,7 +1,8 @@
 package cn.bngel.resume.config;
 
-import cn.bngel.resume.interceptor.ApplicantTokenInterceptor;
-import cn.bngel.resume.interceptor.EmployerTokenInterceptor;
+import cn.bngel.interceptor.InterceptorFactory;
+import cn.bngel.redis.token.TokenClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -11,21 +12,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer {
 
-    @Bean
-    public EmployerTokenInterceptor employerTokenInterceptor() {
-        return new EmployerTokenInterceptor();
-    }
-
-    @Bean
-    public ApplicantTokenInterceptor applicantTokenInterceptor() {
-        return new ApplicantTokenInterceptor();
-    }
+    @Autowired
+    private TokenClient tokenClient;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(applicantTokenInterceptor())
+        registry.addInterceptor(InterceptorFactory.createApplicantTokenInterceptor(tokenClient))
                 .addPathPatterns("/resume/applicant/**");
-        registry.addInterceptor(employerTokenInterceptor())
+        registry.addInterceptor(InterceptorFactory.createEmployerTokenInterceptor(tokenClient))
                 .addPathPatterns("/resume/employer/**");
     }
 

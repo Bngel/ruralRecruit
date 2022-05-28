@@ -1,11 +1,10 @@
-package cn.bngel.applicant.config;
+package cn.bngel.logger.config;
 
 import cn.bngel.redis.SimpleRedisClient;
 import cn.bngel.redis.cache.CacheClient;
 import cn.bngel.redis.cache.CacheRedisClient;
 import cn.bngel.redis.token.TokenClient;
 import cn.bngel.redis.token.TokenRedisClient;
-import cn.bngel.util.TencentCloudClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,5 +47,6 @@ public class RedisConfiguration {
     public CacheClient cacheClient() {
         return new CacheRedisClient(simpleRedisClient());
     }
+
 
 }

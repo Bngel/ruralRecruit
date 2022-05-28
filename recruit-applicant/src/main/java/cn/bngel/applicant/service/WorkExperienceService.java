@@ -12,32 +12,32 @@ public interface WorkExperienceService {
      * @param id 主键id
      * @return 工作经历详细信息
      */
-    WorkExperience getWorkExperience(@Param("id") Integer id);
+    WorkExperience getWorkExperience(Integer id);
 
     /**
      * 通过求职者手机号返回该求职者工作经历列表
      * @return 求职者工作经历列表
      */
-    List<WorkExperience> listWorkExperiences(@Param("phone") String phone);
+    List<WorkExperience> listWorkExperiences(String phone);
 
     /**
      * 创建一个新的工作经历
      * @param workExperience 求职者工作经历
      * @return 成功则返回 1 失败则返回 0
      */
-    Integer saveWorkExperience(@Param("workExperience") WorkExperience workExperience);
+    Integer saveWorkExperience(WorkExperience workExperience);
 
     /**
      * 更新求职者工作经历
      * @param workExperience 用于修改的数据(不需要修改的部分留null)
      * @return 成功则返回 1 失败则返回 0
      */
-    Integer updateWorkExperience(@Param("workExperience") WorkExperience workExperience);
+    Integer updateWorkExperience(WorkExperience workExperience);
 
     /**
      * 根据主键id删除求职者工作经历
      * @param id 主键id
      * @return 成功则返回 1 失败则返回 0
      */
-    Integer removeWorkExperience(@Param("id") Integer id);
+    Integer removeWorkExperience(Integer id);
 }

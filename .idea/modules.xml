@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/recruit-applicant/recruit-applicant.iml" filepath="$PROJECT_DIR$/recruit-applicant/recruit-applicant.iml" />
       <module fileurl="file://$PROJECT_DIR$/recruit-employer/recruit-employer.iml" filepath="$PROJECT_DIR$/recruit-employer/recruit-employer.iml" />
       <module fileurl="file://$PROJECT_DIR$/recruit-job/recruit-job.iml" filepath="$PROJECT_DIR$/recruit-job/recruit-job.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recruit-logger/recruit-logger.iml" filepath="$PROJECT_DIR$/recruit-logger/recruit-logger.iml" />
       <module fileurl="file://$PROJECT_DIR$/recruit-resume/recruit-resume.iml" filepath="$PROJECT_DIR$/recruit-resume/recruit-resume.iml" />
       <module fileurl="file://$PROJECT_DIR$/ruralRecruit.iml" filepath="$PROJECT_DIR$/ruralRecruit.iml" />
     </modules>

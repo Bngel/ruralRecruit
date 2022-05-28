@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bngel.logger.dao.LoggerDao">
+
+    <resultMap id="log" type="cn.bngel.pojo.RLog">
+        <id column="id" jdbcType="BIGINT" javaType="Integer" property="id"/>
+        <result column="phone" jdbcType="VARCHAR" javaType="String" property="phone"/>
+        <result column="user_type" jdbcType="TINYINT" javaType="Integer" property="userType"/>
+        <result column="method" jdbcType="VARCHAR" javaType="String" property="method"/>
+        <result column="url" jdbcType="VARCHAR" javaType="String" property="url"/>
+        <result column="body" jdbcType="VARCHAR" javaType="String" property="body"/>
+        <result column="ip" jdbcType="VARCHAR" javaType="String" property="ip"/>
+        <result column="timestamp" jdbcType="BIGINT" javaType="Long" property="timestamp"/>
+    </resultMap>
+
+    <select id="getLog" resultMap="log">
+        SELECT * FROM `recruit_log` WHERE `id` = #{id};
+    </select>
+
+    <select id="listLogsByPhone" resultMap="log">
+        SELECT * FROM `recruit_log` WHERE `phone` = #{phone};
+    </select>
+
+    <select id="listLogsByTimestamp" resultMap="log">
+        SELECT * FROM `recruit_log` WHERE `timestamp` &gt;= #{startTime} AND `timestamp` &lt;= #{endTime};
+    </select>
+
+    <select id="listLogsByIp" resultMap="log">
+        SELECT * FROM `recruit_log` WHERE `ip` = #{ip};
+    </select>
+
+    <insert id="saveLog" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO `recruit_log` (
+        <if test="log.id!=null">`id`</if>
+        <if test="log.phone!=null">,`phone`</if>
+        <if test="log.userType!=null">,`user_type`</if>
+        <if test="log.method!=null">,`method`</if>
+        <if test="log.url!=null">,`url`</if>
+        <if test="log.body!=null">,`body`</if>
+        <if test="log.ip!=null">,`ip`</if>
+        <if test="log.timestamp!=null">,`timestamp`</if>
+        ) VALUES (
+        <if test="log.id!=null">#{log.id}</if>
+        <if test="log.phone!=null">,#{log.phone}</if>
+        <if test="log.userType!=null">,#{log.userType}</if>
+        <if test="log.method!=null">,#{log.method}</if>
+        <if test="log.url!=null">,#{log.url}</if>
+        <if test="log.body!=null">,#{log.body}</if>
+        <if test="log.ip!=null">,#{log.ip}</if>
+        <if test="log.timestamp!=null">,#{log.timestamp}</if>
+        );
+    </insert>
+
+    <delete id="removeLog">
+        DELETE FROM `recruit_log` WHERE `id` = #{id};
+    </delete>
+
+    <delete id="removeLogsByTimestamp">
+        DELETE FROM `recruit_log` WHERE `timestamp` &gt;= #{startTime} AND `timestamp` &lt;= #{endTime};
+    </delete>
+
+    <update id="updateLog">
+        UPDATE `recruit_log`
+        <set>
+            <if test="log.id!=null">`id`=#{log.id}</if>
+            <if test="log.phone!=null">,`phone`=#{log.phone}</if>
+            <if test="log.userType!=null">,`user_type`=#{log.userType}</if>
+            <if test="log.method!=null">,`method`=#{log.method}</if>
+            <if test="log.url!=null">,`url`=#{log.url}</if>
+            <if test="log.body!=null">,`body`=#{log.body}</if>
+            <if test="log.ip!=null">,`ip`=#{log.ip}</if>
+            <if test="log.timestamp!=null">,`timestamp`=#{log.timestamp}</if>
+        </set>
+        WHERE `id` = #{log.id};
+    </update>
+</mapper>

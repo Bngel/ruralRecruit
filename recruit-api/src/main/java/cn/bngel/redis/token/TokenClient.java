@@ -35,4 +35,11 @@ public interface TokenClient {
      * @return 合法返回 true, 不合法则返回false
      */
     boolean verifyToken(String token, JSONObject json);
+
+    /**
+     * 获得将token解密后的json字符串
+     * @param token 待解密的json串
+     * @return 解密后的json串
+     */
+    String getDecryptedToken(String token);
 }

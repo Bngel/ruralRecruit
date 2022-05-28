@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class SerializeUtil {
+public final class SerializeUtil {
 
     private static final String DEFAULT_CHARSET = "ISO-8859-1";
 

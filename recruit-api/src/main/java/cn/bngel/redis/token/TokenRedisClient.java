@@ -47,11 +47,10 @@ public class TokenRedisClient implements TokenClient{
 
     @Override
     public boolean verifyToken(String token, JSONObject json) {
-        String salt = redisClient.get(Constant.CACHE_TOKEN_SALT);
-        if (token == null || salt == null) {
+        if (token == null) {
             return false;
         }
-        String decryptedToken = decryptToken(token, salt);
+        String decryptedToken = getDecryptedToken(token);
         JSONObject jsonObject = JSONUtil.toBean(decryptedToken, JSONObject.class);
         for (Map.Entry<String, Object> entry : json.entrySet()) {
             String key = entry.getKey();
@@ -67,6 +66,12 @@ public class TokenRedisClient implements TokenClient{
         String id = (String) jsonObject.get(Constant.TOKEN_PARAM_ID);
         String cachedToken = redisClient.get(Constant.CACHE_TOKEN + id);
         return token.equals(cachedToken);
+    }
+
+    @Override
+    public String getDecryptedToken(String token) {
+        String salt = redisClient.get(Constant.CACHE_TOKEN_SALT);
+        return decryptToken(token, salt);
     }
 
     @Autowired

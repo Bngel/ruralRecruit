@@ -15,7 +15,6 @@ import java.util.List;
 @Api(tags = "招聘模块 - 职位信息")
 public class JobController {
 
-
     /**
      * 根据id获取职位详细信息
      * @param id 职位id

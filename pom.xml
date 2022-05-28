@@ -11,6 +11,7 @@
         <module>recruit-employer</module>
         <module>recruit-api</module>
         <module>recruit-resume</module>
+        <module>recruit-logger</module>
     </modules>
     <name>ruralRecruit</name>
     <description>project for RuralRecruit</description>

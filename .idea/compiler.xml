@@ -10,6 +10,7 @@
         <module name="recruit-employer" />
         <module name="recruit-job" />
         <module name="recruit-resume" />
+        <module name="recruit-logger" />
         <module name="recruit-applicant" />
         <module name="recruit-api" />
       </profile>
@@ -21,6 +22,7 @@
       <module name="recruit-commonapi" target="8" />
       <module name="recruit-employer" target="8" />
       <module name="recruit-job" target="8" />
+      <module name="recruit-logger" target="8" />
       <module name="recruit-resume" target="8" />
       <module name="recruit-user" target="8" />
       <module name="ruralRecruit" target="1.5" />

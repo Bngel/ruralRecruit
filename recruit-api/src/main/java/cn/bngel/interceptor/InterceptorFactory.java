@@ -24,6 +24,15 @@ public class InterceptorFactory {
     }
 
     /**
+     * 返回管理员对应的token鉴权拦截器
+     * @param tokenClient 进行鉴权需要的TokenClient
+     * @return 管理员对应的token鉴权拦截器
+     */
+    public static HandlerInterceptor createAdminTokenInterceptor(TokenClient tokenClient){
+        return new AdminTokenInterceptor(tokenClient);
+    }
+
+    /**
      * 私有化工厂类的构造方法，不允许进行实例化
      */
     private InterceptorFactory() {}

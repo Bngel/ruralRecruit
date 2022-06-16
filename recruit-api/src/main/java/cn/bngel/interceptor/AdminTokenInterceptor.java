@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
-public class AdminTokenInterceptor extends InterceptorTemplate {
+class AdminTokenInterceptor extends InterceptorTemplate {
 
     protected AdminTokenInterceptor(TokenClient tokenClient) {
         this.tokenClient = tokenClient;
+        this.tokenSwitch = true;
     }
 
     @Override

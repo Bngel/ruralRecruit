@@ -1,5 +1,8 @@
 package cn.bngel.interceptor;
 
+import cn.bngel.openfeign.logger.LoggerFeignClient;
+import cn.bngel.openfeign.logger.LoggerService;
+import cn.bngel.pojo.CommonResult;
 import cn.bngel.pojo.Constant;
 import cn.bngel.pojo.RLog;
 import cn.bngel.redis.token.TokenClient;
@@ -7,6 +10,8 @@ import cn.bngel.util.InterceptorUtil;
 import cn.bngel.util.SerializeUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.ServletOutputStream;
@@ -14,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
+@Slf4j
 abstract class InterceptorTemplate implements HandlerInterceptor {
 
     @Override
@@ -42,12 +48,14 @@ abstract class InterceptorTemplate implements HandlerInterceptor {
 
     protected TokenClient tokenClient;
 
+    protected LoggerService logger;
+
     /**
      * 各个功能模块是否开启
      */
 
-    protected boolean tokenSwitch = true;
-    protected boolean loggerSwitch = true;
+    protected boolean tokenSwitch = false;
+    protected boolean loggerSwitch = false;
 
     /**
      * 模板方法的通用方法
@@ -56,26 +64,40 @@ abstract class InterceptorTemplate implements HandlerInterceptor {
     protected abstract boolean tokenEvent(HttpServletRequest request, HttpServletResponse response, Object handler);
 
     protected void loggerEvent(HttpServletRequest request, HttpServletResponse response, Object handler){
-        RLog log = getLogFromRequest(request);
+        RLog rLog = getLogFromRequest(request);
+        log.info(rLog.toString());
         try {
-            // TODO 上传日志信息
+            CommonResult<?> result = logger.saveLog(rLog);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 通过用户访问接口带有的request进行相关日志信息的获取
+     * @param request 用户请求接口的request信息
+     * @return 封装完成的日志信息实例
+     */
     private RLog getLogFromRequest(HttpServletRequest request){
         RLog log = new RLog();
+        log.setId(0);
         log.setMethod(request.getMethod());
-        log.setIp(request.getRemoteAddr());
+        String ip = request.getRemoteAddr();
+        log.setIp(ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip);
         log.setUrl(request.getRequestURI());
         log.setTimestamp(new Date().getTime());
-        log.setBody(SerializeUtil.serializeToString(request.getParameterMap()));
+        //log.setBody(SerializeUtil.serializeToString(request.getParameterMap()));
         String token = request.getHeader("Authorization");
-        String decryptedToken = tokenClient.getDecryptedToken(token);
-        JSONObject jsonObject = JSONUtil.toBean(decryptedToken, JSONObject.class);
-        log.setPhone((String) jsonObject.get(Constant.TOKEN_PARAM_PHONE));
-        log.setUserType((Integer) jsonObject.get(Constant.TOKEN_PARAM_LOGIN_TYPE));
+        if (token != null) {
+            try {
+                String decryptedToken = tokenClient.getDecryptedToken(token);
+                JSONObject jsonObject = JSONUtil.toBean(decryptedToken, JSONObject.class);
+                log.setPhone((String) jsonObject.get(Constant.TOKEN_PARAM_PHONE));
+                log.setUserType((Integer) jsonObject.get(Constant.TOKEN_PARAM_LOGIN_TYPE));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return log;
     }
 }

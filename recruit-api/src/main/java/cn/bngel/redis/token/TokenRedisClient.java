@@ -21,7 +21,7 @@ public class TokenRedisClient implements TokenClient{
             String token = jedis.get(Constant.CACHE_TOKEN + key);
             if (token == null) {
                 token = getToken(data);
-                redisClient.set(Constant.CACHE_TOKEN + key, token);
+                redisClient.setex(Constant.CACHE_TOKEN + key, 24 * 60 * 60, token);
             }
             return token;
         });
@@ -47,7 +47,8 @@ public class TokenRedisClient implements TokenClient{
 
     @Override
     public boolean verifyToken(String token, JSONObject json) {
-        if (token == null) {
+        String salt = redisClient.get(Constant.CACHE_TOKEN_SALT);
+        if (token == null || salt == null) {
             return false;
         }
         String decryptedToken = getDecryptedToken(token);

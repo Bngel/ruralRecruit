@@ -17,6 +17,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(InterceptorFactory.createLoggerInterceptor(tokenClient))
+                .addPathPatterns("/resume/**");
         registry.addInterceptor(InterceptorFactory.createApplicantTokenInterceptor(tokenClient))
                 .addPathPatterns("/resume/applicant/**");
         registry.addInterceptor(InterceptorFactory.createEmployerTokenInterceptor(tokenClient))

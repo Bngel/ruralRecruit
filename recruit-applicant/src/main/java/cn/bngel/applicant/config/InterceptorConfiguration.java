@@ -2,7 +2,9 @@ package cn.bngel.applicant.config;
 
 import cn.bngel.interceptor.InterceptorFactory;
 import cn.bngel.redis.token.TokenClient;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -16,10 +18,12 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(InterceptorFactory.createLoggerInterceptor(tokenClient))
+                .addPathPatterns("/applicant/**")
+                .addPathPatterns("/workExperience/**");
         registry.addInterceptor(InterceptorFactory.createApplicantTokenInterceptor(tokenClient))
                 .addPathPatterns("/applicant/applicant/**")
-                .addPathPatterns("/workExperience/applicant/**")
-                .excludePathPatterns("/applicant/login/**");
+                .addPathPatterns("/workExperience/applicant/**");
         registry.addInterceptor(InterceptorFactory.createEmployerTokenInterceptor(tokenClient))
                 .addPathPatterns("/applicant/employer/**")
                 .addPathPatterns("/workExperience/employer/**");

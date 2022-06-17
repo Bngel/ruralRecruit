@@ -2,8 +2,6 @@ package cn.bngel.interceptor;
 
 import cn.bngel.openfeign.logger.LoggerFeignClient;
 import cn.bngel.redis.token.TokenClient;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

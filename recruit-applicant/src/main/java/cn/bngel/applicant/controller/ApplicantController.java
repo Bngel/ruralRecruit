@@ -4,7 +4,6 @@ import cn.bngel.applicant.service.ApplicantService;
 import cn.bngel.pojo.Applicant;
 import cn.bngel.pojo.CommonResult;
 import cn.bngel.pojo.Constant;
-import cn.bngel.pojo.Employer;
 import cn.bngel.redis.token.TokenClient;
 import cn.hutool.json.JSONObject;
 import io.swagger.annotations.Api;

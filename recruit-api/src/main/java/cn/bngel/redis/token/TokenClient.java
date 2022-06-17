@@ -1,9 +1,6 @@
 package cn.bngel.redis.token;
 
 import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
-
-import java.util.Map;
 
 public interface TokenClient {
 

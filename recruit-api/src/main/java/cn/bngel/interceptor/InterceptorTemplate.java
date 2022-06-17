@@ -1,13 +1,11 @@
 package cn.bngel.interceptor;
 
-import cn.bngel.openfeign.logger.LoggerFeignClient;
 import cn.bngel.openfeign.logger.LoggerService;
 import cn.bngel.pojo.CommonResult;
 import cn.bngel.pojo.Constant;
 import cn.bngel.pojo.RLog;
 import cn.bngel.redis.token.TokenClient;
 import cn.bngel.util.InterceptorUtil;
-import cn.bngel.util.SerializeUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 
@@ -65,9 +63,12 @@ abstract class InterceptorTemplate implements HandlerInterceptor {
 
     protected void loggerEvent(HttpServletRequest request, HttpServletResponse response, Object handler){
         RLog rLog = getLogFromRequest(request);
-        log.info(rLog.toString());
         try {
             CommonResult<?> result = logger.saveLog(rLog);
+            // 日志显示信息 IP、URL
+            log.info(String.format("[%s] ip:%-15s url:%-25s",
+                    result.getCode() == Constant.RESULT_CODE_SUCCESS ? "SUCCESS" : "FAILURE",
+                    rLog.getIp(), rLog.getUrl()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,7 +98,19 @@ abstract class InterceptorTemplate implements HandlerInterceptor {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            String phone = request.getParameter("phone");
+            if (phone != null) {
+                log.setPhone(phone);
+            }
+            String uri = request.getRequestURI();
+            if (uri.startsWith("/applicant")) {
+                log.setUserType(Constant.LOGIN_TYPE_APPLICANT);
+            } else if (uri.startsWith("/employer")) {
+                log.setUserType(Constant.LOGIN_TYPE_EMPLOYER);
+            }
         }
         return log;
     }
+
 }

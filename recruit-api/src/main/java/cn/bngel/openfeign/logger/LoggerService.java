@@ -2,7 +2,6 @@ package cn.bngel.openfeign.logger;
 
 import cn.bngel.pojo.CommonResult;
 import cn.bngel.pojo.RLog;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 public interface LoggerService {

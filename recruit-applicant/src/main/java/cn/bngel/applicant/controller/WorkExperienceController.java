@@ -2,12 +2,10 @@ package cn.bngel.applicant.controller;
 
 import cn.bngel.pojo.WorkExperience;
 import cn.bngel.pojo.CommonResult;
-import cn.bngel.pojo.Constant;
 import cn.bngel.applicant.service.WorkExperienceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
